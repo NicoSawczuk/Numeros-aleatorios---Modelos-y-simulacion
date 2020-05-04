@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="./static/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <script src="./static/jquery/jquery-3.5.0.min.js"></script>
     <script src="./static/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+
+    <!-- Importamos los scripts de los metodoos -->
+    <script src="./metodo/vonNeuman.js"></script>
     <title>Actividad 2 - Numeros aleatorios</title>
 </head>
 
@@ -18,25 +21,107 @@
             <div>
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#metodo1" role="tab" aria-controls="nav-home" aria-selected="true">Metodo 1</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#metodo2" role="tab" aria-controls="nav-profile" aria-selected="false">Metodo 2</a>
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#metodo1" role="tab" aria-controls="nav-home" aria-selected="true">Von Neuman</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#metodo2" role="tab" aria-controls="nav-profile" aria-selected="false">Congruencias Mixto</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="metodo1" role="tabpanel" aria-labelledby="nav-home-tab">
                         <br>
-                        <p class="text-muted card-title">Breve descripcion de como usar</p>
-                    </div>
-                    <div class="tab-pane fade" id="metodo2" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <p class="text-muted card-title">Breve descripcion de como usar el método de Von Neuman</p>
                         <br>
-                        <p class="text-muted card-title">Breve descripcion de como usar</p>
-                    </div>
+                        <div class="row">
+                            <div class="input-group col col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Numero inicial</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un numeor cualquiera de 4 cifras" id="semilla">
+                            </div>
+                        </div>
+                        <small id="errorSemilla" class="form-text text-danger"></small>
+                        <br>
 
+                        <div class="row">
+                            <div class="input-group col col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Cant. de numeros</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un numero que indique la cantidad de numeros pseudoaleatorios a generar" id="iteraciones">
+                            </div>
+                        </div>
+                        <small id="errorIteraciones" class="form-text text-danger"></small>
+                        <br>
+                        <button type="button" onclick="obtenerValores()" class="btn btn-primary">Generar</button>
+                        <button type="button" onclick="limpiar()" class="btn btn-light">Limpiar todo</button>
+                    </div>
+                    <br>
+                    <div class="card" id="cardResultado" style="display: none;">
+                        <div class="card-header bg-info">Resultado</div>
+                        <div class="card-body">
+                            <p id="resultados"></p>
+                        </div>
+                    </div>
                 </div>
+                <div class="tab-pane fade" id="metodo2" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <br>
+                    <p class="text-muted card-title">Breve descripcion de como usar el método de Congruencias Mixto</p>
+                </div>
+
             </div>
         </div>
     </div>
+    </div>
 
 </body>
+
+<script>
+    function obtenerValores() {
+
+        var semilla = $('#semilla').val();
+        var n = document.getElementById("iteraciones").value;
+        if ($('#semilla').val() == "") {
+            $('#errorSemilla').html('Debe ingresar un numero de 4 dígitos');
+            if ($('$iteraciones').val() == "") {
+                $('#errorIteraciones').html('Debe ingresar un numero mayor a cero')
+            }
+        } else {
+            $('#errorSemilla').html('');
+            if (String(semilla).length == 4) {
+                var semillaAux = String(semilla);
+                if (semillaAux[semillaAux.length] == "0" && semillaAux[semillaAux.length - 1] == "0") {
+                    $('#errorSemilla').html('No puede ingresar un numero cuyos valores finales sean cero');
+                } else {
+
+                    if ($('#iteraciones').val() == "" || $('#iteraciones').val() == "0") {
+                        $('#errorIteraciones').html('Debe ingresar un numero mayor a cero');
+                    } else {
+                        $('#errorSemilla').html('');
+                        $('#errorIteraciones').html('');
+                        $('#cardResultado').css({
+                            display: "block"
+                        });
+                        var arregloResultado = metodoVonNeuman(semilla, n);
+                        $('#resultados').html('');
+                        for (let i = 0; i < arregloResultado.length; i++) {
+                            $('#resultados').append(arregloResultado[i][0] + ': ' +
+                                arregloResultado[i][1] + ' <br> ');
+                        }
+                    }
+                }
+            } else {
+                $('#errorSemilla').html('Debe ingresar un numero de 4 dígitos');
+            }
+        }
+
+    }
+
+    function limpiar() {
+        $('#semilla').val('');
+        $('#iteraciones').val('');
+        $('#cardResultado').css({
+            display: "none"
+        });
+    }
+</script>
 
 </html>
