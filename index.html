@@ -10,6 +10,7 @@
 
     <!-- Importamos los scripts de los metodoos -->
     <script src="./metodo/vonNeuman.js"></script>
+    <script src="./metodo/congruenciaMixto.js"></script>
     <title>Actividad 2 - Numeros aleatorios</title>
 </head>
 
@@ -19,14 +20,16 @@
         <div class="card-body">
             <p class="text-muted card-title">Breve descripcion de como usar</p>
             <div>
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#metodo1" role="tab" aria-controls="nav-home" aria-selected="true">Von Neuman</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#metodo2" role="tab" aria-controls="nav-profile" aria-selected="false">Congruencias Mixto</a>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="metodo1" role="tabpanel" aria-labelledby="nav-home-tab">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="vonNeuman-tab" data-toggle="tab" href="#vonNeuman" role="tab" aria-controls="vonNeuman" aria-selected="true">Von Neumann</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="congruenciaMixto-tab" data-toggle="tab" href="#congruenciaMixto" role="tab" aria-controls="congruenciaMixto" aria-selected="false">Congruencia Mixto</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="vonNeuman" role="tabpanel" aria-labelledby="vonNeuman-tab">
                         <br>
                         <p class="text-muted card-title">
                             Primer método aritmético para generar nros. pseudoaleatorios. Desarrollado por Von Neumann y Metropolis en 1946.
@@ -63,20 +66,83 @@
                         <br>
                         <button type="button" onclick="obtenerValores()" class="btn btn-primary">Generar</button>
                         <button type="button" onclick="limpiar()" class="btn btn-light">Limpiar todo</button>
-                    </div>
-                    <br>
-                    <div class="card" id="cardResultado" style="display: none;">
-                        <div class="card-header bg-info">Resultado</div>
-                        <div class="card-body">
-                            <p id="resultados"></p>
+                        <br>
+                        <br>
+                        <div class="card" id="cardResultado" style="display: none;">
+                            <div class="card-header bg-info">Resultado</div>
+                            <div class="card-body">
+                                <p id="resultados"></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="metodo2" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <br>
-                    <p class="text-muted card-title">Breve descripcion de como usar el método de Congruencias Mixto</p>
-                </div>
-
+                    <div class="tab-pane fade" id="congruenciaMixto" role="tabpanel" aria-labelledby="congruenciaMixto-tab">
+                        <br>
+                        <p class="text-muted card-title">Breve descripcion de como usar el método de Congruencias Mixto</p>
+                        <br>
+                        <h5>Generador</h5>
+                        <br>
+                        <div class="row">
+                            <div class="input-group col col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 180px;">Semilla (X<sub>0</sub>)</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número cualquiera" id="semilla2">
+                            </div>
+                        </div>
+                        <small id="errorSemilla2" class="form-text text-danger"></small>
+                        <br>
+                        <div class="row">
+                            <div class="input-group col col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default2" style="width: 180px;">Multiplicador (a)</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero impar no divisible por 3 o 5" id="valorA">
+                            </div>
+                        </div>
+                        <small id="errorValorA" class="form-text text-danger"></small>
+                        <br>
+                        <div class="row">
+                            <div class="input-group col col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default3" style="width: 180px;">Constante Aditiva (c)</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero impar no relativamente primo a M " id="valorC">
+                            </div>
+                        </div>
+                        <small id="errorValorC" class="form-text text-danger"></small>
+                        <br>
+                        <div class="row">
+                            <div class="input-group col col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default4" style="width: 180px;">Modulo (m)</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero mayor a semilla,a y c" id="valorM">
+                            </div>
+                        </div>
+                        <small id="errorValorM" class="form-text text-danger"></small>
+                        <br>
+                        <div class="row">
+                            <div class="input-group col col-md-8">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default4" style="width: 180px;">Iteraciones</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese el numero de iteraciones" id="iteracionesCM">
+                            </div>
+                        </div>
+                        <small id="errorIteraciones2" class="form-text text-danger"></small>
+                        <br>
+                        <button type="button" onclick="obtenerValoresCongruencia()" class="btn btn-primary">Generar</button>
+                        <button type="button" onclick="limpiarCongruencia()" class="btn btn-light">Limpiar todo</button>
+                        <br>
+                        <br>
+                        <div class="card" id="cardResultado" style="display: none;">
+                            <div class="card-header bg-info">Resultado</div>
+                            <div class="card-body">
+                                <p id="resultados"></p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>               
             </div>
         </div>
     </div>
@@ -133,5 +199,22 @@
         });
     }
 </script>
+<script>
+    function obtenerValoresCongruencia(){
+        var semilla  = $('#semilla2').val() ;
+        var a = $('#valorA').val() ;
+        var c = $('#valorC').val() ;
+        var m = $('#valorM').val() ;
+        var iteraciones = $('#iteracionesCM').val() ;
+        console.log(metodoCongruenciaMixto(semilla,a,c,m,iteraciones)) ;
+    }
 
+    function limpiarCongruencia(){
+        $('#semilla2').val('') ;
+        $('#valorA').val('') ;
+        $('#valorC').val('') ;
+        $('#valorM').val('') ;
+        $('#iteracionesCM').val('') ;
+    }
+</script>
 </html>
