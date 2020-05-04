@@ -28,14 +28,24 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="metodo1" role="tabpanel" aria-labelledby="nav-home-tab">
                         <br>
-                        <p class="text-muted card-title">Breve descripcion de como usar el método de Von Neuman</p>
+                        <p class="text-muted card-title">
+                            Primer método aritmético para generar nros. pseudoaleatorios. Desarrollado por Von Neumann y Metropolis en 1946.
+                            <br> Consiste en:
+                            <br>
+                            <b>1.</b> Tomar un número cualquiera de 4 (cuatro) dígitos y asignarlo al primer elemento (semilla) de la serie, x1. <br>
+                            <b>2.</b> Elevarlo al cuadrado y completar 8 (ocho) cifras, si fuera necesario con ceros a la izquierda. <br>
+                            <b>3.</b> Descartar los 2 (dos) primeros dígitos, al igual que los 2 (dos) últimos. <br>
+                            <b>4.</b> Tomar los 4 (cuatro) dígitos centrales como elemento siguiente de la sucesión, x2. <br>
+                            <b>5.</b> Repetir los pasos del 2 al 4 n veces, siendo n la cantidad de nros pseudoaleatorios a generar </p>
+                        <br>
+                        <h5>Generador</h5>
                         <br>
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Numero inicial</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 150px;">Número inicial</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un numeor cualquiera de 4 cifras" id="semilla">
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número cualquiera de 4 cifras" id="semilla">
                             </div>
                         </div>
                         <small id="errorSemilla" class="form-text text-danger"></small>
@@ -44,7 +54,7 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Cant. de numeros</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 150px;">Cant. de números</span>
                                 </div>
                                 <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un numero que indique la cantidad de numeros pseudoaleatorios a generar" id="iteraciones">
                             </div>
