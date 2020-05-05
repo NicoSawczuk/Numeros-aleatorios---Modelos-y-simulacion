@@ -222,12 +222,16 @@
         var c = $('#valorC').val();
         var m = $('#valorM').val();
         var iteraciones = $('#iteracionesCM').val();
-        if(this.validarSemilla && this.validarA && this.validarC && this.validarM){
+        $('#errorSemilla2').html('') ;
+        $('#errorValorA').html('') ;
+        $('#errorValorC').html('') ;
+        $('#errorValorM').html('') ;
+        if(this.validarSemilla() == 1 && this.validarA() == 1 && this.validarC() == 1 && this.validarM() == 1){
     
             $('#cardResultadoCongruencia').css({
                 display: "block"
             });
-    
+
             var arregloResultadoCongruencia = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
             $('#tablaCongruenciaMixta tbody').html('');
             for (let i = 0; i < arregloResultadoCongruencia.length; i++) {
@@ -241,17 +245,17 @@
                             '</tr>' ;
                 $('#tablaCongruenciaMixta tbody').append(row);
             }
-        }else if(this.validarSemilla != 1){
-            $('#errorSemilla2').val(validarSemilla) ;
+        }else if(this.validarSemilla() != 1){
+            $('#errorSemilla2').html(validarSemilla) ;
         }
-        else if(this.validarA != 1){
-            $('#errorValorA').val(validarA) ;
+        else if(this.validarA() != 1){
+            $('#errorValorA').html(validarA) ;
         }
-        else if(this.validarC != 1){
-            $('#errorValorC').val(validarC) ;
+        else if(this.validarC() != 1){
+            $('#errorValorC').html(validarC) ;
         }
-        else if(this.validarM != 1){
-            $('#errorValorM').val(validarM) ;
+        else if(this.validarM() != 1){
+            $('#errorValorM').html(validarM) ;
         }
 
 
