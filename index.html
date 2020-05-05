@@ -331,10 +331,10 @@
         if ((a % 2) == 0) {
             return 'El multiplicador a debe ser un numero impar';
         }
-        if ((a % 3) == 0) {
+        if ((a % 3) != 0) {
             return 'El multiplicador a debe no debe ser divisible por 3';
         }
-        if ((a % 5) == 0) {
+        if ((a % 5) != 0) {
             return 'El multiplicador a debe no debe ser divisible por 5';
         }
         return 1;
