@@ -1,0 +1,1 @@
+Para usar el generador debe abrir el archivo index.html

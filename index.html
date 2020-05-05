@@ -11,14 +11,16 @@
     <!-- Importamos los scripts de los metodoos -->
     <script src="./metodo/vonNeuman.js"></script>
     <script src="./metodo/congruenciaMixto.js"></script>
-    <title>Actividad 2 - Numeros aleatorios</title>
+    <title>Generador de numeros pseudoaleatorios</title>
 </head>
 
 <body class="container">
     <div class="mt-2 card">
-        <div class="card-header" style="background-color: rgb(169, 211, 255, 0.8);"><b>Metodos para calcular numeros pseudoaleatorios</b></div>
+        <div class="card-header" style="background-color: rgb(169, 211, 255, 0.8);"><b>Métodos para calcular numeros pseudoaleatorios</b></div>
         <div class="card-body">
-            <p class="text-muted card-title">Breve descripcion de como usar</p>
+            <p class="text-muted card-title">Para utilizar los generadores de números pseudoaleatorios basta con seleccionar el método a utilizar y completar los campos solicitados por el método. <br> Luego de cargar los datos solicitados, presionar en el botón <b>Generar.</b> <br> Si
+                desea eliminar los numeros generados, presionar el boton <b>Limpiar Todo.</b></p>
+            <br>
             <div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
@@ -32,7 +34,7 @@
                     <div class="tab-pane fade show active" id="vonNeuman" role="tabpanel" aria-labelledby="vonNeuman-tab">
                         <br>
                         <p class="text-muted card-title">
-                            Primer método aritmético para generar nros. pseudoaleatorios. Desarrollado por Von Neumann y Metropolis en 1946.
+                            Primer método aritmético para generar números pseudoaleatorios. Desarrollado por Von Neumann y Metropolis en 1946.
                             <br> Consiste en:
                             <br>
                             <b>1.</b> Tomar un número cualquiera de 4 (cuatro) dígitos y asignarlo al primer elemento (semilla) de la serie, x1. <br>
@@ -68,8 +70,8 @@
                         <button type="button" onclick="limpiar()" class="btn btn-light">Limpiar todo</button>
                         <br>
                         <br>
-                        <div class="card" id="cardResultado" style="display: none;">
-                            <div class="card-header bg-info">Resultado</div>
+                        <div class="card bg-light mb-3" id="cardResultado" style="display: none;">
+                            <div class="card-header bg-info text-white">Resultado</div>
                             <div class="card-body">
                                 <table id="tablaVonNeumann" class="table table-striped table-bordered">
                                     <thead class="table-info text-center">
@@ -88,7 +90,17 @@
                     </div>
                     <div class="tab-pane fade" id="congruenciaMixto" role="tabpanel" aria-labelledby="congruenciaMixto-tab">
                         <br>
-                        <p class="text-muted card-title">Breve descripcion de como usar el método de Congruencias Mixto</p>
+                        <p class="text-muted card-title">
+                            Los generadores congruenciales lineales generan una secuencia de números pseudoaleatorios en la cual el próximo número pseudoaleatorio es determinado a partir del último número generado, es decir, el número pseudoaleatorio <b>X<sub>n+1</sub></b>                            es derivado a partir del número pseudoaleatorio <b>X<sub>n</sub></b>. La relación de recurrencia para el generador congruencial mixto es <b>X<sub>n+1</sub> = (aX<sub>n</sub> + c) mod m</b>, en donde:
+                        </p>
+                        <ul class="text-muted">
+                            <li>X<sub>0</sub> = es la semilla</li>
+                            <li>a = el multiplicador</li>
+                            <li>c = la constante aditiva</li>
+                            <li>m = el módulo (m >X<sub>0</sub>, a, c)</li>
+                            <li>X<sub>0</sub>, a, c > 0</li>
+                        </ul>
+
                         <hr>
                         <h5>Generador</h5>
                         <br>
@@ -146,8 +158,8 @@
                         <button type="button" onclick="limpiarCongruencia()" class="btn btn-light">Limpiar todo</button>
                         <br>
                         <br>
-                        <div class="card" id="cardResultadoCongruencia" style="display: none;">
-                            <div class="card-header bg-info">Resultado</div>
+                        <div class="card bg-light mb-3" id="cardResultadoCongruencia" style="display: none;">
+                            <div class="card-header bg-info text-white">Resultado</div>
                             <div class="card-body">
                                 <table id="tablaCongruenciaMixta" class="table table-striped table-bordered">
                                     <thead class="table-info text-center">
@@ -242,7 +254,8 @@
         $('#errorValorA').html('');
         $('#errorValorC').html('');
         $('#errorValorM').html('');
-        if (this.validarSemilla() == 1 && this.validarA() == 1 && this.validarC() == 1 && this.validarM() == 1) {
+        $('#errorIteraciones2').html('');
+        if (this.validarSemilla() == 1 && this.validarA() == 1 && this.validarC() == 1 && this.validarM() == 1 && this.validarIteraciones() == 1) {
 
             $('#cardResultadoCongruencia').css({
                 display: "block"
@@ -273,6 +286,9 @@
             }
             if (this.validarM() != 1) {
                 $('#errorValorM').html(validarM);
+            }
+            if (this.validarIteraciones() != 1) {
+                $('#errorIteraciones2').html(validarIteraciones);
             }
         }
 
@@ -355,6 +371,18 @@
             return 'El modulo m debe ser mayor a X0, a y c'
         }
 
+        return 1;
+    }
+
+    function validarIteraciones() {
+        var iteraciones = $('#iteracionesCM').val();
+        if (iteraciones == "") {
+            return 'Debe ingresar un entero positivo';
+        }
+        iteraciones = parseInt(iteraciones);
+        if (iteraciones <= 0) {
+            return 'Debe ingresar un numero mayor a cero';
+        }
         return 1;
     }
 </script>

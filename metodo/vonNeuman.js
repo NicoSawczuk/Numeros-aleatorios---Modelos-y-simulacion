@@ -37,6 +37,8 @@ function metodoVonNeuman(semilla, n) {
         semilla = parseInt(xAux);
     }
 
+
+    //Retornamos el array con todos los numeros pseudoaleatorios calculados
     return arregloSucesiones;
 
 };
