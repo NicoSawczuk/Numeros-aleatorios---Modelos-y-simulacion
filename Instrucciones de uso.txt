@@ -1,1 +1,4 @@
 Para usar el generador debe abrir el archivo index.html
+
+Para ver el funcionamiento de cada metodo acceder a la carpeta metodo y abrir el archivo
+javascript del metodo correspondiente
