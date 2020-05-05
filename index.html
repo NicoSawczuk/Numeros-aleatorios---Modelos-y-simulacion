@@ -277,7 +277,13 @@
 
     function validarSemilla() {
         var semilla = $('#semilla2').val();
+        if (semilla == "") {
+            return 'Debe ingresar un entero positivo';
+        }
         semilla = parseInt(semilla);
+        if (semilla == NaN) {
+            return 'Debe ingresar un entero positivo';
+        }
         if (semilla <= 0) {
             return 'La semilla debe ser mayor a cero';
         }
@@ -286,7 +292,12 @@
 
     function validarA() {
         var a = $('#valorA').val();
+        if (a == "") {
+            return 'Debe ingresar un entero positivo';
+        }
         a = parseInt(a);
+        console.log(a);
+
         if (a <= 0) {
             return 'El multiplicador a debe ser mayor a cero';
         }
@@ -304,7 +315,13 @@
 
     function validarC() {
         var c = $('#valorC').val();
+        if (c == "") {
+            return 'Debe ingresar un entero positivo';
+        }
         c = parseInt(c);
+        if (c == NaN) {
+            return 'Debe ingresar un entero positivo';
+        }
         if (c <= 0) {
             return 'La constante aditiva a debe ser mayor a cero';
         }
@@ -316,10 +333,16 @@
         var a = $('#valorA').val();
         var c = $('#valorC').val();
         var semilla = $('#semilla2').val();
+        if (m == "") {
+            return 'Debe ingresar un entero positivo';
+        }
         semilla = parseInt(semilla);
         c = parseInt(c);
         a = parseInt(a);
         m = parseInt(m);
+        if (m == NaN) {
+            return 'Debe ingresar un entero positivo';
+        }
         if (c <= 0) {
             return 'El modulo m debe ser mayor a cero';
         }
