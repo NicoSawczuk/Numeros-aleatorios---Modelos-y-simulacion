@@ -99,7 +99,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default2" style="width: 180px;">Multiplicador (a)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  placeholder="Ingrese un entero impar no divisible por 3 o 5" id="valorA">
+                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero impar no divisible por 3 o 5" id="valorA">
                             </div>
                         </div>
                         <small id="errorValorA" class="form-text text-danger"></small>
@@ -187,15 +187,15 @@
                         $('#tablaVonNeumann tbody').html(row);
 
                         for (let i = 0; i < arregloResultado.length; i++) {
-                            row = '<tr>'+
-                                            '<td>'+
-                                                arregloResultado[i][0]+
-                                            '</td>'+
-                                            '<td class="text-right">'+
-                                                arregloResultado[i][1]+
-                                            '</td>'+
-                                        '</tr>' ;
-                            
+                            row = '<tr>' +
+                                '<td>' +
+                                arregloResultado[i][0] +
+                                '</td>' +
+                                '<td class="text-right">' +
+                                arregloResultado[i][1] +
+                                '</td>' +
+                                '</tr>';
+
                             $('#tablaVonNeumann tbody').append(row);
                         }
                     }
@@ -222,12 +222,12 @@
         var c = $('#valorC').val();
         var m = $('#valorM').val();
         var iteraciones = $('#iteracionesCM').val();
-        $('#errorSemilla2').html('') ;
-        $('#errorValorA').html('') ;
-        $('#errorValorC').html('') ;
-        $('#errorValorM').html('') ;
-        if(this.validarSemilla() == 1 && this.validarA() == 1 && this.validarC() == 1 && this.validarM() == 1){
-    
+        $('#errorSemilla2').html('');
+        $('#errorValorA').html('');
+        $('#errorValorC').html('');
+        $('#errorValorM').html('');
+        if (this.validarSemilla() == 1 && this.validarA() == 1 && this.validarC() == 1 && this.validarM() == 1) {
+
             $('#cardResultadoCongruencia').css({
                 display: "block"
             });
@@ -235,32 +235,34 @@
             var arregloResultadoCongruencia = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
             $('#tablaCongruenciaMixta tbody').html('');
             for (let i = 0; i < arregloResultadoCongruencia.length; i++) {
-                var row = '<tr>'+
-                                '<td>'+
-                                    arregloResultadoCongruencia[i][0]+
-                                '</td>'+
-                                '<td class="text-right">'+
-                                    arregloResultadoCongruencia[i][1]+
-                                '</td>'+
-                            '</tr>' ;
+                var row = '<tr>' +
+                    '<td>' +
+                    arregloResultadoCongruencia[i][0] +
+                    '</td>' +
+                    '<td class="text-right">' +
+                    arregloResultadoCongruencia[i][1] +
+                    '</td>' +
+                    '</tr>';
                 $('#tablaCongruenciaMixta tbody').append(row);
             }
-        }else if(this.validarSemilla() != 1){
-            $('#errorSemilla2').html(validarSemilla) ;
-        }
-        else if(this.validarA() != 1){
-            $('#errorValorA').html(validarA) ;
-        }
-        else if(this.validarC() != 1){
-            $('#errorValorC').html(validarC) ;
-        }
-        else if(this.validarM() != 1){
-            $('#errorValorM').html(validarM) ;
+        } else {
+            if (this.validarSemilla() != 1) {
+                $('#errorSemilla2').html(validarSemilla);
+            }
+            if (this.validarA() != 1) {
+                $('#errorValorA').html(validarA);
+            }
+            if (this.validarC() != 1) {
+                $('#errorValorC').html(validarC);
+            }
+            if (this.validarM() != 1) {
+                $('#errorValorM').html(validarM);
+            }
         }
 
 
     }
-    
+
 
     function limpiarCongruencia() {
         $('#semilla2').val('');
@@ -273,61 +275,60 @@
         });
     }
 
-    function validarSemilla(){
-        var semilla = $('#semilla2').val() ;
-        semilla = parseInt(semilla) ;
-        if(semilla <= 0){
-            return 'La semilla debe ser mayor a cero' ;   
+    function validarSemilla() {
+        var semilla = $('#semilla2').val();
+        semilla = parseInt(semilla);
+        if (semilla <= 0) {
+            return 'La semilla debe ser mayor a cero';
         }
-        return 1 ;
+        return 1;
     }
 
-    function validarA(){
-        var a = $('#valorA').val() ;
-        a = parseInt(a) ;
-        if(a <= 0){
-            return 'El multiplicador a debe ser mayor a cero' ;   
+    function validarA() {
+        var a = $('#valorA').val();
+        a = parseInt(a);
+        if (a <= 0) {
+            return 'El multiplicador a debe ser mayor a cero';
         }
-        if((a%2) == 0){
-            return 'El multiplicador a debe ser un numero impar' ;   
+        if ((a % 2) == 0) {
+            return 'El multiplicador a debe ser un numero impar';
         }
-        if((a%3)==0){
-            return 'El multiplicador a debe no debe ser divisible por 3' ;   
+        if ((a % 3) == 0) {
+            return 'El multiplicador a debe no debe ser divisible por 3';
         }
-        if((a%5)==0){
-            return 'El multiplicador a debe no debe ser divisible por 5' ;   
+        if ((a % 5) == 0) {
+            return 'El multiplicador a debe no debe ser divisible por 5';
         }
-        return 1 ;
+        return 1;
     }
 
-    function validarC(){
-        var c = $('#valorC').val() ;
-        c = parseInt(c) ;
-        if(c <= 0){
-            return 'La constante aditiva a debe ser mayor a cero' ;   
+    function validarC() {
+        var c = $('#valorC').val();
+        c = parseInt(c);
+        if (c <= 0) {
+            return 'La constante aditiva a debe ser mayor a cero';
         }
-        return 1 ;
+        return 1;
     }
 
-    function validarM(){
-        var m = $('#valorM').val() ;
-        var a = $('#valorA').val() ;
-        var c = $('#valorC').val() ;
-        var semilla = $('#semilla2').val() ;
-        semilla = parseInt(semilla) ;
-        c = parseInt(c) ;
-        a = parseInt(a) ;
-        m = parseInt(m) ;
-        if(c <= 0){
-            return 'El modulo m debe ser mayor a cero' ;   
+    function validarM() {
+        var m = $('#valorM').val();
+        var a = $('#valorA').val();
+        var c = $('#valorC').val();
+        var semilla = $('#semilla2').val();
+        semilla = parseInt(semilla);
+        c = parseInt(c);
+        a = parseInt(a);
+        m = parseInt(m);
+        if (c <= 0) {
+            return 'El modulo m debe ser mayor a cero';
         }
-        if(m<semilla && m<a && m<c){
+        if (m < semilla && m < a && m < c) {
             return 'El modulo m debe ser mayor a X0, a y c'
         }
-        
-        return 1 ;
-    }
 
+        return 1;
+    }
 </script>
 
 </html>
