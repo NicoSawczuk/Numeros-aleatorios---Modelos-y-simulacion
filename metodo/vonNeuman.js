@@ -26,10 +26,14 @@ function metodoVonNeuman(semilla, n) {
         }
 
         //Ahora comprobamos que xAux (nuestro numero siguiente de la sucecion) no contenga dos ceros al final
-        if (xAux[xAux.length - 1] == "0" && xAux[xAux.length - 2] == "0") {
-            var auxiliar = "";
-            auxiliar = xAux[0] + xAux[1] + "13";
-            xAux = auxiliar;
+        if (!(xAux == "0000")) {
+            if (xAux[xAux.length - 1] == "0" && xAux[xAux.length - 2] == "0") {
+                var auxiliar = "";
+                auxiliar = xAux[0] + xAux[1] + "13";
+                xAux = auxiliar;
+            }
+        } else {
+            break;
         }
 
         arregloSucesiones.push(['Sucesión ' + (i + 1), xAux]);
