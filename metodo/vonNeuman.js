@@ -33,6 +33,7 @@ function metodoVonNeuman(semilla, n) {
                 xAux = auxiliar;
             }
         } else {
+            arregloSucesiones.push(['Sucesión ' + (i + 1), 'Si las iteraciones resultantes no llegan a las suceciones solicitadas es porque el metodo decae!'])
             break;
         }
 

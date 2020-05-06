@@ -16,41 +16,55 @@
 
 <body class="container">
     <div class="mt-2 card">
-        <div class="card-header" style="background-color: rgb(169, 211, 255, 0.8);"><b>Métodos para calcular numeros pseudoaleatorios</b></div>
+        <div class="card-header" style="background-color: rgb(169, 211, 255, 0.8);"><b>Métodos para calcular numeros
+                pseudoaleatorios</b></div>
         <div class="card-body">
-            <p class="text-muted card-title">Para utilizar los generadores de números pseudoaleatorios basta con seleccionar el método a utilizar y completar los campos solicitados por el método. <br> Luego de cargar los datos solicitados, presionar en el botón <b>Generar.</b> <br> Si
+            <p class="text-muted card-title">Para utilizar los generadores de números pseudoaleatorios basta con
+                seleccionar el método a utilizar y completar los campos solicitados por el método. <br> Luego de cargar
+                los datos solicitados, presionar en el botón <b>Generar.</b> <br> Si
                 desea eliminar los numeros generados, presionar el boton <b>Limpiar Todo.</b></p>
             <br>
             <div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="vonNeuman-tab" data-toggle="tab" href="#vonNeuman" role="tab" aria-controls="vonNeuman" aria-selected="true">Von Neumann</a>
+                        <a class="nav-link active" id="vonNeuman-tab" data-toggle="tab" href="#vonNeuman" role="tab"
+                            aria-controls="vonNeuman" aria-selected="true">Von Neumann</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="congruenciaMixto-tab" data-toggle="tab" href="#congruenciaMixto" role="tab" aria-controls="congruenciaMixto" aria-selected="false">Congruencia Mixto</a>
+                        <a class="nav-link" id="congruenciaMixto-tab" data-toggle="tab" href="#congruenciaMixto"
+                            role="tab" aria-controls="congruenciaMixto" aria-selected="false">Congruencia Mixto</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="vonNeuman" role="tabpanel" aria-labelledby="vonNeuman-tab">
+                    <div class="tab-pane fade show active" id="vonNeuman" role="tabpanel"
+                        aria-labelledby="vonNeuman-tab">
                         <br>
                         <p class="text-muted card-title">
-                            Primer método aritmético para generar números pseudoaleatorios. Desarrollado por Von Neumann y Metropolis en 1946.
+                            Primer método aritmético para generar números pseudoaleatorios. Desarrollado por Von Neumann
+                            y Metropolis en 1946.
                             <br> Consiste en:
                             <br>
-                            <b>1.</b> Tomar un número cualquiera de 4 (cuatro) dígitos y asignarlo al primer elemento (semilla) de la serie, x1. <br>
-                            <b>2.</b> Elevarlo al cuadrado y completar 8 (ocho) cifras, si fuera necesario con ceros a la izquierda. <br>
+                            <b>1.</b> Tomar un número cualquiera de 4 (cuatro) dígitos y asignarlo al primer elemento
+                            (semilla) de la serie, x1. <br>
+                            <b>2.</b> Elevarlo al cuadrado y completar 8 (ocho) cifras, si fuera necesario con ceros a
+                            la izquierda. <br>
                             <b>3.</b> Descartar los 2 (dos) primeros dígitos, al igual que los 2 (dos) últimos. <br>
-                            <b>4.</b> Tomar los 4 (cuatro) dígitos centrales como elemento siguiente de la sucesión, x2. <br>
-                            <b>5.</b> Repetir los pasos del 2 al 4 n veces, siendo n la cantidad de nros pseudoaleatorios a generar </p>
+                            <b>4.</b> Tomar los 4 (cuatro) dígitos centrales como elemento siguiente de la sucesión, x2.
+                            <br>
+                            <b>5.</b> Repetir los pasos del 2 al 4 n veces, siendo n la cantidad de nros
+                            pseudoaleatorios a generar </p>
                         <hr>
                         <h5>Generador</h5>
                         <br>
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 150px;">Número inicial</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Número inicial</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número cualquiera de 4 cifras" id="semilla">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un número cualquiera de 4 cifras" id="semilla">
                             </div>
                         </div>
                         <small id="errorSemilla" class="form-text text-danger"></small>
@@ -59,9 +73,13 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 150px;">Cant. de números</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Cant. de números</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un numero que indique la cantidad de numeros pseudoaleatorios a generar" id="iteraciones">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un numero que indique la cantidad de numeros pseudoaleatorios a generar"
+                                    id="iteraciones">
                             </div>
                         </div>
                         <small id="errorIteraciones" class="form-text text-danger"></small>
@@ -85,13 +103,26 @@
                                     <tbody>
                                     </tbody>
                                 </table>
+                                <div class="text-muted">
+                                    Para copiar
+                                    <br>
+                                    <p id="vonNeumannCopy">
+
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="congruenciaMixto" role="tabpanel" aria-labelledby="congruenciaMixto-tab">
+                    <div class="tab-pane fade" id="congruenciaMixto" role="tabpanel"
+                        aria-labelledby="congruenciaMixto-tab">
                         <br>
                         <p class="text-muted card-title">
-                            Los generadores congruenciales lineales generan una secuencia de números pseudoaleatorios en la cual el próximo número pseudoaleatorio es determinado a partir del último número generado, es decir, el número pseudoaleatorio <b>X<sub>n+1</sub></b>                            es derivado a partir del número pseudoaleatorio <b>X<sub>n</sub></b>. La relación de recurrencia para el generador congruencial mixto es <b>X<sub>n+1</sub> = (aX<sub>n</sub> + c) mod m</b>, en donde:
+                            Los generadores congruenciales lineales generan una secuencia de números pseudoaleatorios en
+                            la cual el próximo número pseudoaleatorio es determinado a partir del último número
+                            generado, es decir, el número pseudoaleatorio <b>X<sub>n+1</sub></b> es derivado a partir
+                            del número pseudoaleatorio <b>X<sub>n</sub></b>. La relación de recurrencia para el
+                            generador congruencial mixto es <b>X<sub>n+1</sub> = (aX<sub>n</sub> + c) mod m</b>, en
+                            donde:
                         </p>
                         <ul class="text-muted">
                             <li>X<sub>0</sub> = es la semilla</li>
@@ -107,9 +138,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 180px;">Semilla (X<sub>0</sub>)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 180px;">Semilla (X<sub>0</sub>)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número cualquiera" id="semilla2">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un número cualquiera" id="semilla2">
                             </div>
                         </div>
                         <small id="errorSemilla2" class="form-text text-danger"></small>
@@ -117,9 +151,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default2" style="width: 180px;">Multiplicador (a)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default2"
+                                        style="width: 180px;">Multiplicador (a)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero impar no divisible por 3 o 5" id="valorA">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un entero impar no divisible por 3 o 5" id="valorA">
                             </div>
                         </div>
                         <small id="errorValorA" class="form-text text-danger"></small>
@@ -127,9 +164,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default3" style="width: 180px;">Constante Aditiva (c)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default3"
+                                        style="width: 180px;">Constante Aditiva (c)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero impar no relativamente primo a M " id="valorC">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un entero impar no relativamente primo a M " id="valorC">
                             </div>
                         </div>
                         <small id="errorValorC" class="form-text text-danger"></small>
@@ -137,9 +177,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default4" style="width: 180px;">Modulo (m)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default4"
+                                        style="width: 180px;">Modulo (m)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero mayor a semilla, a y c" id="valorM">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un entero mayor a semilla, a y c" id="valorM">
                             </div>
                         </div>
                         <small id="errorValorM" class="form-text text-danger"></small>
@@ -147,14 +190,18 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default4" style="width: 180px;">Iteraciones</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default4"
+                                        style="width: 180px;">Iteraciones</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese el numero de iteraciones" id="iteracionesCM">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese el numero de iteraciones" id="iteracionesCM">
                             </div>
                         </div>
                         <small id="errorIteraciones2" class="form-text text-danger"></small>
                         <br>
-                        <button type="button" onclick="obtenerValoresCongruencia()" class="btn btn-primary">Generar</button>
+                        <button type="button" onclick="obtenerValoresCongruencia()"
+                            class="btn btn-primary">Generar</button>
                         <button type="button" onclick="limpiarCongruencia()" class="btn btn-light">Limpiar todo</button>
                         <br>
                         <br>
@@ -173,6 +220,13 @@
                                     <tbody>
                                     </tbody>
                                 </table>
+                                <div class="text-muted">
+                                    Para copiar
+                                    <br>
+                                    <p id="congruMixCopy">
+
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -213,7 +267,8 @@
                         var arregloResultado = metodoVonNeuman(semilla, n);
                         var row = ''
                         $('#tablaVonNeumann tbody').html(row);
-
+                        $('#vonNeumannCopy').html('');
+                        var paraCopiar = '[ ';
                         for (let i = 0; i < arregloResultado.length; i++) {
                             row = '<tr>' +
                                 '<td>' +
@@ -223,9 +278,11 @@
                                 arregloResultado[i][1] +
                                 '</td>' +
                                 '</tr>';
-
+                            paraCopiar += arregloResultado[i][1] + ', ' ;
                             $('#tablaVonNeumann tbody').append(row);
                         }
+                        paraCopiar += ']';
+                        $('#vonNeumannCopy').html(paraCopiar);
                     }
                 }
             } else {
@@ -263,6 +320,8 @@
 
             var arregloResultadoCongruencia = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
             $('#tablaCongruenciaMixta tbody').html('');
+            $('#vonNeumannCopy').html('');
+            var paraCopiar = '[ ';
             for (let i = 0; i < arregloResultadoCongruencia.length; i++) {
                 var row = '<tr>' +
                     '<td>' +
@@ -272,8 +331,11 @@
                     arregloResultadoCongruencia[i][1] +
                     '</td>' +
                     '</tr>';
+                paraCopiar += arregloResultadoCongruencia[i][1] + ', ' ;
                 $('#tablaCongruenciaMixta tbody').append(row);
             }
+            paraCopiar += ']';
+            $('#congruMixCopy').html(paraCopiar);
         } else {
             if (this.validarSemilla() != 1) {
                 $('#errorSemilla2').html(validarSemilla);
