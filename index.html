@@ -11,6 +11,7 @@
     <!-- Importamos los scripts de los metodoos -->
     <script src="./metodo/vonNeuman.js"></script>
     <script src="./metodo/congruenciaMixto.js"></script>
+    <script src="./metodo/separarNumeros.js"></script>
     <title>Generador de numeros pseudoaleatorios</title>
 </head>
 
@@ -249,11 +250,14 @@
                             display: "block"
                         });
                         var arregloResultado = metodoVonNeuman(semilla, n);
+                        var arregloResultadoVonNeumanAux = [];
                         var row = ''
                         $('#tablaVonNeumann tbody').html(row);
                         $('#vonNeumannCopy').html('');
-                        var paraCopiar = '[ ';
                         for (let i = 0; i < arregloResultado.length; i++) {
+                            if (!(isNaN(arregloResultado[i][1]))) {
+                                arregloResultadoVonNeumanAux.push(arregloResultado[i][1])
+                            }
                             row = '<tr>' +
                                 '<td>' +
                                 arregloResultado[i][0] +
@@ -262,11 +266,9 @@
                                 arregloResultado[i][1] +
                                 '</td>' +
                                 '</tr>';
-                            paraCopiar += arregloResultado[i][1] + ', ';
                             $('#tablaVonNeumann tbody').append(row);
                         }
-                        paraCopiar += ']';
-                        $('#vonNeumannCopy').html(paraCopiar);
+                        $('#vonNeumannCopy').html('[' + separar(arregloResultadoVonNeumanAux) + ']');
                     }
                 }
             } else {
@@ -303,10 +305,11 @@
             });
 
             var arregloResultadoCongruencia = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
+            var arregloResultadoCongruenciaAux = [];
             $('#tablaCongruenciaMixta tbody').html('');
             $('#vonNeumannCopy').html('');
-            var paraCopiar = '[ ';
             for (let i = 0; i < arregloResultadoCongruencia.length; i++) {
+                arregloResultadoCongruenciaAux.push(arregloResultadoCongruencia[i][1]);
                 var row = '<tr>' +
                     '<td>' +
                     arregloResultadoCongruencia[i][0] +
@@ -315,11 +318,9 @@
                     arregloResultadoCongruencia[i][1] +
                     '</td>' +
                     '</tr>';
-                paraCopiar += arregloResultadoCongruencia[i][1] + ', ';
                 $('#tablaCongruenciaMixta tbody').append(row);
             }
-            paraCopiar += ']';
-            $('#congruMixCopy').html(paraCopiar);
+            $('#congruMixCopy').html('[' + separar(arregloResultadoCongruenciaAux) + ']');
         } else {
             if (this.validarSemilla() != 1) {
                 $('#errorSemilla2').html(validarSemilla);
