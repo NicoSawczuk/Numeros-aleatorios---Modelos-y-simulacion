@@ -1,9 +1,9 @@
-function chiCuadrado(array, gl) {
+function chiCuadrado(array) {
 
     var n = array.length //n es la cantidad de elementos
     var k = 10; //k es la posibilidad de numeros que hay, en este caso, 10 (0-9)
     var pi = n / k; //pi es la probabilidad que tiene cada numero de salir
-    var gl = gl; //gl son los grados de libertad
+
 
     var arrayRetorno = [];
 
