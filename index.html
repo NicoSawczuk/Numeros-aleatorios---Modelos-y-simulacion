@@ -117,8 +117,11 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Realizar test de aleatoriedad</h5>
-                                <p class="card-text">Para realizar los test de aleatoriedad presione en el botón del test que desee realizar.<br>
-                                    Luego de obtener los resultados, presione en el botón “Tablas” y compare los resultados para concluir con sus hipótesis.</p>
+                                <p class="card-text">
+                                    Para realizar los test de aleatoriedad presione en el botón del test que desee realizar.<br>
+                                    Luego de obtener los resultados, presione en el botón “Tablas” y compare los resultados para concluir con sus hipótesis.<br>
+                                    Para el caso de Chi cuadrado, el resultado de la hipotesis se vera al final de su tabla.
+                                </p>
                                 <p>
                                     <div class="row">
                                         <div class="col">
@@ -287,7 +290,11 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Realizar test de aleatoriedad</h5>
-                                <p class="card-text">Breve explicacion de lo que es y como hacerlo</p>
+                                <p class="card-text">
+                                    Para realizar los test de aleatoriedad presione en el botón del test que desee realizar.<br>
+                                    Luego de obtener los resultados, presione en el botón “Tablas” y compare los resultados para concluir con sus hipótesis.<br>
+                                    Para el caso de Chi cuadrado, el resultado de la hipotesis se vera al final de su tabla.
+                                </p>
                                 <p>
                                     <div class="row">
                                         <div class="col">
@@ -302,11 +309,15 @@
                                     </div>
                                     <br>
                                     <div class="row">
-                                        <div class="col">
-                                            <button id="botonTestChiCuadradoCongru" type="button" class="btn btn-outline-primary" onclick="mostrarChiCuadradoCongru()">Chi cuadrado</button>
+                                        <div class="col-4">
+                                            <label for="">Seleccione un procentaje de aceptacion</label>
+                                            <select name="" id="selectCongru" class="custom-select">
+                                            </select>
+                                        </div>
+                                        <div class="col-4 mt-4" >
+                                            <button id="botonTestChiCuadradoCongru" style="margin-top: 7px;" type="button" class="btn btn-outline-primary" onclick="mostrarChiCuadradoCongru()">Chi cuadrado</button>
                                         </div>
                                     </div>
-
                                     <br>
                                     <div class="row">
                                         <table id="tablaChiCuadradoCongru" class="table table-striped table-bordered">
@@ -335,6 +346,11 @@
                                             <tbody>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="row">
+                                        <div id="resultadoChiCongru" class="alert alert-info" role="alert" style="display: none; width: 100%;">
+                                           
+                                        </div>
                                     </div>
                                 </p>
                             </div>
@@ -483,6 +499,11 @@
             $('#testAleatoriedadCongru').css({
                 display: "block"
             })
+            var tablaChi = getTabla() ;
+            for (let i = 0; i < tablaChi.length; i++) {
+                $("#selectCongru").append('<option value="'+tablaChi[i][0]+'">'+tablaChi[i][0]+'</option>');
+                
+            }
         } else {
             if (this.validarSemilla() != 1) {
                 $('#errorSemilla2').html(validarSemilla);
@@ -519,6 +540,9 @@
         });
         $('#resultadoRachaCongru').css({
             display: "none"
+        });
+        $('#resultadoChiCongru').css({
+            display: "none" 
         });
     }
 
@@ -633,7 +657,6 @@
         }
         $('#tablaChiCuadradoVonNeuman tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>'+m+'</b></td></tr>');
          
-        console.log(verificarChi(m,p));
         $('#resultadoChiVonNeuman').html('<h4>Resultado con 9 grados de libertad </h4> <br>' + verificarChi(m, p)) ;
         $('#resultadoChiVonNeuman').css({
             display: 'block' 
@@ -649,6 +672,7 @@
         var c = $('#valorC').val();
         var m = $('#valorM').val();
         var iteraciones = $('#iteracionesCM').val();
+        var p = $('#selectCongru').val();
 
         var arregloResultado = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
         var arregloResultadoCongruAux = [];
@@ -673,7 +697,10 @@
         }
         $('#tablaChiCuadradoCongru tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>'+m+'</b></td></tr>');
 
-
+        $('#resultadoChiCongru').html('<h4>Resultado con 9 grados de libertad </h4> <br>' + verificarChi(m, p)) ;
+        $('#resultadoChiCongru').css({
+            display: 'block' 
+        });
 
     }
 </script>
