@@ -16,6 +16,7 @@
     <!-- Importamos los scripts de los test de aleatoriedad -->
     <script src="./testAleatoriedad/chiCuadrado.js"></script>
     <script src="./testAleatoriedad/racha.js"></script>
+    <script src="./testAleatoriedad/verificarChi.js"></script>
     <title>Generador de numeros pseudoaleatorios</title>
 </head>
 
@@ -132,11 +133,15 @@
                                     </div>
                                     <br>
                                     <div class="row">
-                                        <div class="col">
-                                            <button id="botonTestChiCuadradoVonNeuman" type="button" class="btn btn-outline-primary" onclick="mostrarChiCuadrado()">Chi cuadrado</button>
+                                        <div class="col-4">
+                                            <label for="">Seleccione un procentaje de aceptacion</label>
+                                            <select name="" id="selectVonNeuman" class="custom-select">
+                                            </select>
+                                        </div>
+                                        <div class="col-4 mt-4" >
+                                            <button id="botonTestChiCuadradoVonNeuman" style="margin-top: 7px;" type="button" class="btn btn-outline-primary" onclick="mostrarChiCuadrado()">Chi cuadrado</button>
                                         </div>
                                     </div>
-
                                     <br>
                                     <div class="row">
                                         <table id="tablaChiCuadradoVonNeuman" class="table table-striped table-bordered">
@@ -165,6 +170,11 @@
                                             <tbody>
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="row">
+                                        <div id="resultadoChiVonNeuman" class="alert alert-info" role="alert" style="display: none; width: 100%;">
+                                           
+                                        </div>
                                     </div>
                                 </p>
                             </div>
@@ -402,6 +412,12 @@
                         $('#testAleatoriedadVonNeuman').css({
                             display: "block"
                         });
+
+                        var tablaChi = getTabla() ;
+                        for (let i = 0; i < tablaChi.length; i++) {
+                            $("#selectVonNeuman").append('<option value="'+tablaChi[i][0]+'">'+tablaChi[i][0]+'</option>');
+                            
+                        }
                     }
                 }
             } else {
@@ -422,6 +438,9 @@
         });
         $('#resultadoRachaVonNeuman').css({
             display: "none"
+        });
+        $('#resultadoChiVonNeuman').css({
+            display: "none" 
         });
     }
 </script>
@@ -588,6 +607,7 @@
 
         var semilla = $('#semilla').val();
         var n = $('#iteraciones').val();
+        var p = $('#selectVonNeuman').val();
 
 
         var arregloResultado = metodoVonNeuman(semilla, n);
@@ -612,7 +632,12 @@
             m += (resultadoChiCuadrado[i][5]);
         }
         $('#tablaChiCuadradoVonNeuman tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>'+m+'</b></td></tr>');
-
+         
+        console.log(verificarChi(m,p));
+        $('#resultadoChiVonNeuman').html('<h4>Resultado con 9 grados de libertad </h4> <br>' + verificarChi(m, p)) ;
+        $('#resultadoChiVonNeuman').css({
+            display: 'block' 
+        });
 
         }
 </script>
@@ -647,6 +672,7 @@
             m += (resultadoChiCuadrado[i][5]);
         }
         $('#tablaChiCuadradoCongru tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>'+m+'</b></td></tr>');
+
 
 
     }
