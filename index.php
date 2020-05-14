@@ -1,1 +1,1 @@
-<?php require_once("C:\Users\nico2\OneDrive\Facultad\Cuarto Año\C1\Modelos y simulacion\Tema 2 - Numeros aleatorios\Actividad - Kachuka, Sawczuk\Numeros-aleatorios---Modelos-y-simulacion\index.html") ?>
+<?php require_once("index.html") ?>
