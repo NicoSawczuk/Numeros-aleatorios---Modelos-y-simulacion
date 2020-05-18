@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="./static/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <script src="./static/jquery/jquery-3.5.0.min.js"></script>
     <script src="./static/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
-    <title>Document</title>
+
+    <!-- Importamos los scripts -->
+    <script src="./metodo/marcaClase.js"></script>
+    <title>Marcas de clase</title>
 </head>
 
 
@@ -19,7 +22,8 @@
                 <div class="input-group col col-md-8">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px;">Nº de marcas
-                            de clase</span>
+                            de clase
+                        </span>
                     </div>
                     <input type="number" class="form-control" aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número" id="cantMarcas"
@@ -30,15 +34,52 @@
             <div class="row" id="entradas">
 
             </div>
-            <button type="button" onclick="calcularMarca()" class="btn btn-primary" style="display: none;" id="generarCalc">Generar</button>
+            <button type="button" onclick="calcularMarca()" class="btn btn-primary" style="display: none;"
+                id="generarCalc">Generar
+            </button>
+            <br>
+            
+            <div class="row">
+                <div id="alertNumGen" class="alert alert-info" role="alert" style="display: none; width: 100%;">
+                    <h4>Números generados</h4>
+                    <p id="numerosGenerados" class="alert-info">
+                    </p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <table id="tablaMC" class="table table-striped table-bordered" style="display: none;">
+                    <thead class="table-info text-center">
+                        <tr id="trHeaderMC"></tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <table id="tablaMC2" class="table table-striped table-bordered" style="display: none;">
+                    <thead class="table-info text-center">
+                        <tr id="trHeaderMC2">
+                            <td>MC</td>
+                            <td>Apariciones</td>
+                            <td>Esperadas</td>
+                            <td>Obtenidas</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 
     <script>
         var controls = sessionStorage.getItem("arreglo");
         console.log(controls);
-        console.log(controls[1]);
-        var res = controls.split(",");
+        var arrayNumeros = controls.split(",");
+        console.log(arrayNumeros);
         function agregarInputs() {
             $('#entradas').html('');
             var cant = $('#cantMarcas').val();
@@ -46,32 +87,87 @@
             for (let i = 0; i < cant; i++) {
 
                 $('#entradas').append(
-                  
-                        '<div class="form-group col-md-6">'+
-                            '<label for="nombre" class=" col-form-label text-md-right">Nombre</label>'+
-                            '<input id="marcaClase'+i+'" type="text"'+
-                               ' class="form-control" name="marcaClase'+i+'"'+
-                                'placeholder="Ingrese el nombre" required>'+
-                        '</div>'+
-                        '<div class="form-group col-md-6">'+
-                            '<label for="nombre" class=" col-form-label text-md-right">Probabilidad</label>'+
-                            '<input id="probabilidad'+i+'" type="number"'+
-                               ' class="form-control" name="probabilidad'+i+'"'+
-                                'placeholder="Ingrese el nombre" required>'+
-                        '</div>'+
-                   '<br>'
+
+                    '<div class="form-group col-md-6">' +
+                    '<label for="nombre" class=" col-form-label text-md-right">Nombre</label>' +
+                    '<input id="marcaClase' + i + '" type="text"' +
+                    ' class="form-control" name="marcaClase' + i + '"' +
+                    'placeholder="Ingrese el nombre de la MC" required>' +
+                    '</div>' +
+                    '<div class="form-group col-md-6">' +
+                    '<label for="nombre" class=" col-form-label text-md-right">Probabilidad</label>' +
+                    '<input id="probabilidad' + i + '" type="number"' +
+                    ' class="form-control" name="probabilidad' + i + '"' +
+                    'placeholder="Ingrese el valor de la MC en %" value="" required>' +
+                    '</div>' +
+                    '<br>'
                 );
 
             }
             $('#generarCalc').css({
-                display: "block" 
+                display: "block"
             });
         }
 
-        function calcularMarca(){
+        function calcularMarca() {
+
+            $('#tablaMC').css({
+                'display': 'block'
+            });
+            $('#tablaMC2').css({
+                'display': 'block'
+            });
+            $('#alertNumGen').css({
+                'display': 'block'
+            });
+
+            for (let i =0 ; i < arrayNumeros.length; i++){
+                $('#numerosGenerados').append(arrayNumeros[i])
+            }
+
             var cant = $('#cantMarcas').val();
             cant = parseInt(cant);
-            
+            var arrayProbabilidades = [];
+            var arrayMC = [];
+            for (let i = 0; i < cant; i++) {
+                arrayProbabilidades.push($("#probabilidad" + i).val());
+                arrayMC.push($("#marcaClase" + i).val())
+            }
+            console.log(arrayProbabilidades);
+            console.log(arrayMC);
+            console.log(calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades));
+            var resultadosMC = calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades);
+            $('#trHeaderMC').append('<td></td>')
+            for (let i = 0; i < cant; i++) {
+                $('#trHeaderMC').append('' +
+                    '<td>' + arrayMC[i] + '</td>'
+                    + '');
+            }
+            var titulos = ["Acumulada","Minimos", "Maximos"];
+            for (let i = 0; i < 3; i++) {
+                $('#tablaMC tbody').append('<tr>');
+                    $('#tablaMC tbody').append('<td class="table-info text-center">'+titulos[i]+'</td>')
+                for (let j = 0; j < cant; j++) {
+                        $('#tablaMC tbody').append(''+
+                            '<td class="text-right">'+resultadosMC[i][j]+'</td>'
+                        +'');
+                }
+                $('#tablaMC tbody').append('</tr>');
+            }
+
+
+            for (let i = 0; i < cant; i++) {
+                $('#tablaMC2 tbody').append('<tr>');
+                    $('#tablaMC2 tbody').append('<td class="table-info text-center">'+arrayMC[i]+'</td>');
+                for (let j = 3; j < 6; j++) {
+                        $('#tablaMC2 tbody').append(''+
+                            '<td class="text-right">'+resultadosMC[j][i]+'</td>'
+                        +'');
+                }
+                $('#tablaMC2 tbody').append('</tr>');
+            }
+
+
         }
     </script>
 </body>
