@@ -74,9 +74,12 @@
                         </div>
                         <small id="errorIteraciones" class="form-text text-danger"></small>
                         <br>
-                        <button type="button" onclick="obtenerValores()" class="btn btn-primary">Generar</button>
-                        <button type="button" onclick="limpiar()" class="btn btn-light">Limpiar todo</button>
-                        <br>
+                        <div class="row">
+                            <button type="button" onclick="obtenerValores()" class="btn btn-primary ml-3">Generar</button>
+                            <button type="button" class="btn btn-success ml-2" onclick="openwindow()" id="botonMarcaClase" style="display: none;">Abrir</button>
+                            <button type="button" onclick="limpiar()" class="btn btn-light ml-2">Limpiar todo</button>
+                            <br>
+                        </div>
                         <br>
                         <div class="card bg-light mb-3" id="cardResultado" style="display: none;">
                             <div class="card-header bg-info text-white">
@@ -412,6 +415,9 @@
                         $('#testAleatoriedadVonNeuman').css({
                             display: "block"
                         });
+                        $('#botonMarcaClase').css({
+                            display: "block"
+                        });
 
                         var tablaChi = getTabla() ;
                         for (let i = 0; i < tablaChi.length; i++) {
@@ -443,6 +449,27 @@
             display: "none" 
         });
     }
+
+    function openwindow() {
+        var semilla = $('#semilla').val();
+        var n = document.getElementById("iteraciones").value;
+        var arregloResultado = metodoVonNeuman(semilla, n);
+        var arregloResultadoVonNeumanAux = [];
+        for (let i = 0; i < arregloResultado.length; i++) {
+            if (!(isNaN(arregloResultado[i][1]))) {
+                arregloResultadoVonNeumanAux.push(arregloResultado[i][1])
+            }
+        }
+        
+        var x = separar(arregloResultadoVonNeumanAux);
+
+        sessionStorage.setItem("arreglo", x);
+
+        myWindow = window.open("./marcaClase.html", "Ventana");
+    }
+
+  
+
 </script>
 <script>
     function obtenerValoresCongruencia() {

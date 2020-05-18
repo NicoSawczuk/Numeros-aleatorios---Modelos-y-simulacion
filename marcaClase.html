@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <script src="./static/jquery/jquery-3.5.0.min.js"></script>
+    <script src="./static/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+
+
+<body class="container">
+    <div class="mt-2 card">
+        <div class="card-header" style="background-color: rgb(169, 211, 255, 0.8);"><b>Marcas de Clase</b></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="input-group col col-md-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px;">Nº de marcas
+                            de clase</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número" id="cantMarcas"
+                        onkeyup=agregarInputs()>
+                </div>
+            </div>
+            <br>
+            <div class="row" id="entradas">
+
+            </div>
+            <button type="button" onclick="calcularMarca()" class="btn btn-primary" style="display: none;" id="generarCalc">Generar</button>
+        </div>
+    </div>
+
+    <script>
+        var controls = sessionStorage.getItem("arreglo");
+        console.log(controls);
+        console.log(controls[1]);
+        var res = controls.split(",");
+        function agregarInputs() {
+            $('#entradas').html('');
+            var cant = $('#cantMarcas').val();
+            cant = parseInt(cant);
+            for (let i = 0; i < cant; i++) {
+
+                $('#entradas').append(
+                  
+                        '<div class="form-group col-md-6">'+
+                            '<label for="nombre" class=" col-form-label text-md-right">Nombre</label>'+
+                            '<input id="marcaClase'+i+'" type="text"'+
+                               ' class="form-control" name="marcaClase'+i+'"'+
+                                'placeholder="Ingrese el nombre" required>'+
+                        '</div>'+
+                        '<div class="form-group col-md-6">'+
+                            '<label for="nombre" class=" col-form-label text-md-right">Probabilidad</label>'+
+                            '<input id="probabilidad'+i+'" type="number"'+
+                               ' class="form-control" name="probabilidad'+i+'"'+
+                                'placeholder="Ingrese el nombre" required>'+
+                        '</div>'+
+                   '<br>'
+                );
+
+            }
+            $('#generarCalc').css({
+                display: "block" 
+            });
+        }
+    </script>
+</body>
+
+</html>
