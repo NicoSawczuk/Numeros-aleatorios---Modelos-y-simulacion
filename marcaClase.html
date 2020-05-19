@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./static/bootstrap-4.4.1-dist/css/bootstrap.min.css">
     <script src="./static/jquery/jquery-3.5.0.min.js"></script>
     <script src="./static/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <script src="./static/chartsjs/Chart.min.js"></script>
 
     <!-- Importamos los scripts -->
     <script src="./metodo/marcaClase.js"></script>
@@ -48,7 +49,8 @@
                 <button type="button" onclick="calcularMarca()" class="btn btn-primary ml-3" style="display: none;"
                     id="generarCalc">Generar
                 </button>
-                <button type="button" onclick="limpiar()" class="btn btn-light ml-2" style="display: none;" id="limpiar" name="limpiar">Limpiar todo</button>
+                <button type="button" onclick="limpiar()" class="btn btn-light ml-2" style="display: none;" id="limpiar"
+                    name="limpiar">Limpiar todo</button>
             </div>
 
             <br>
@@ -77,15 +79,19 @@
                 </table>
             </div>
 
+            <br>
+            <div class="row">
+                <canvas id="line-chart" width="800" height="450" style="display: none;"></canvas>
+            </div>
         </div>
     </div>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             var controls = sessionStorage.getItem("arreglo");
             var arrayNumeros = controls.split(",");
-            for (let i =0 ; i < arrayNumeros.length; i++){
-                    $('#numerosGenerados').append(arrayNumeros[i])
+            for (let i = 0; i < arrayNumeros.length; i++) {
+                $('#numerosGenerados').append(arrayNumeros[i])
             }
         });
     </script>
@@ -133,10 +139,10 @@
 
             var suma = 0;
             for (let i = 0; i < cant; i++) {
-                var aux = $('#probabilidad'+i+'').val(); 
+                var aux = $('#probabilidad' + i + '').val();
                 suma += parseInt(aux);
             }
-            if(suma == 100){
+            if (suma == 100) {
                 $('#tablaMC').css({
                     'display': 'block'
                 });
@@ -146,7 +152,7 @@
                 $('#alerta').css({
                     'display': 'none'
                 });
-                
+
                 cant = parseInt(cant);
                 var arrayProbabilidades = [];
                 var arrayMC = [];
@@ -166,15 +172,15 @@
                         '<td>' + arrayMC[i] + '</td>'
                         + '');
                 }
-                var titulos = ["Acumulada","Minimos", "Maximos"];
+                var titulos = ["Acumulada", "Minimos", "Maximos"];
                 $('#tablaMC tbody').html('');
                 for (let i = 0; i < 3; i++) {
                     $('#tablaMC tbody').append('<tr>');
-                        $('#tablaMC tbody').append('<td class="table-info text-center">'+titulos[i]+'</td>')
+                    $('#tablaMC tbody').append('<td class="table-info text-center">' + titulos[i] + '</td>')
                     for (let j = 0; j < cant; j++) {
-                            $('#tablaMC tbody').append(''+
-                                '<td class="text-right">'+resultadosMC[i][j]+'</td>'
-                            +'');
+                        $('#tablaMC tbody').append('' +
+                            '<td class="text-right">' + resultadosMC[i][j] + '</td>'
+                            + '');
                     }
                     $('#tablaMC tbody').append('</tr>');
                 }
@@ -183,30 +189,36 @@
                 $('#tablaMC2 tbody').html('');
                 for (let i = 0; i < cant; i++) {
                     $('#tablaMC2 tbody').append('<tr>');
-                        $('#tablaMC2 tbody').append('<td class="table-info text-center">'+arrayMC[i]+'</td>');
+                    $('#tablaMC2 tbody').append('<td class="table-info text-center">' + arrayMC[i] + '</td>');
                     for (let j = 3; j < 6; j++) {
-                            $('#tablaMC2 tbody').append(''+
-                                '<td class="text-right">'+resultadosMC[j][i]+'</td>'
-                            +'');
+                        $('#tablaMC2 tbody').append('' +
+                            '<td class="text-right">' + resultadosMC[j][i] + '</td>'
+                            + '');
                     }
                     $('#tablaMC2 tbody').append('</tr>');
                 }
 
-            }else{
+                //Creamos los graficos
+                $('#line-chart').css({
+                    'display': 'block'
+                });
+                construirGrafico(arrayMC, resultadosMC);
+
+            } else {
                 $('#alerta').css({
                     'display': 'block'
                 });
                 $('#alerta').html('La suma total de las probabilidades debe ser igual 100% ');
 
             }
-            
-            
+
+
 
 
         }
     </script>
     <script>
-        function limpiar(){
+        function limpiar() {
             $('#entradas').find('input').val('');
             $('#tablaMC').css({
                 'display': 'none'
@@ -216,6 +228,38 @@
             });
             $('#alerta').css({
                 'display': 'none'
+            });
+            $('#line-chart').css({
+                'display': 'none'
+            });
+        }
+    </script>
+
+    <script>
+        function construirGrafico(arrayMC, resultadosMC) {
+            new Chart(document.getElementById("line-chart"), {
+                type: 'line',
+                data: {
+                    labels: arrayMC,
+                    datasets: [{
+                        data: resultadosMC[4],
+                        label: "Resultados esperados",
+                        borderColor: "#3CF078",
+                        fill: false
+                    }, {
+                        data: resultadosMC[5],
+                        label: "Resultados obtenidos",
+                        borderColor: "#5D89FF",
+                        fill: false
+                    }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Resultados esperados y obtenidos'
+                    }
+                }
             });
         }
     </script>
