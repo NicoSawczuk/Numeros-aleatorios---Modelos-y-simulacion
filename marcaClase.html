@@ -19,6 +19,13 @@
         <div class="card-header" style="background-color: rgb(169, 211, 255, 0.8);"><b>Marcas de Clase</b></div>
         <div class="card-body">
             <div class="row">
+                <div id="alertNumGen" class="alert alert-info" role="alert" style="width: 100%;">
+                    <h5>Números pseudoaleatorios generados</h5>
+                    <p id="numerosGenerados" class="alert-info">
+                    </p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="input-group col col-md-8">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default" style="width: 200px;">Nº de marcas
@@ -31,21 +38,19 @@
                 </div>
             </div>
             <br>
+            <div class="alert alert-warning" role="alert" id="alerta" style="display: none;">
+            </div>
+            <br>
             <div class="row" id="entradas">
 
             </div>
-            <button type="button" onclick="calcularMarca()" class="btn btn-primary" style="display: none;"
-                id="generarCalc">Generar
-            </button>
-            <br>
-            
             <div class="row">
-                <div id="alertNumGen" class="alert alert-info" role="alert" style="display: none; width: 100%;">
-                    <h4>Números generados</h4>
-                    <p id="numerosGenerados" class="alert-info">
-                    </p>
-                </div>
+                <button type="button" onclick="calcularMarca()" class="btn btn-primary ml-3" style="display: none;"
+                    id="generarCalc">Generar
+                </button>
+                <button type="button" onclick="limpiar()" class="btn btn-light ml-2" style="display: none;" id="limpiar" name="limpiar">Limpiar todo</button>
             </div>
+
             <br>
             <div class="row">
                 <table id="tablaMC" class="table table-striped table-bordered" style="display: none;">
@@ -75,6 +80,15 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function(){
+            var controls = sessionStorage.getItem("arreglo");
+            var arrayNumeros = controls.split(",");
+            for (let i =0 ; i < arrayNumeros.length; i++){
+                    $('#numerosGenerados').append(arrayNumeros[i])
+            }
+        });
+    </script>
     <script>
         var controls = sessionStorage.getItem("arreglo");
         console.log(controls);
@@ -107,67 +121,102 @@
             $('#generarCalc').css({
                 display: "block"
             });
+            $('#limpiar').css({
+                display: "block"
+            });
         }
 
         function calcularMarca() {
 
-            $('#tablaMC').css({
-                'display': 'block'
-            });
-            $('#tablaMC2').css({
-                'display': 'block'
-            });
-            $('#alertNumGen').css({
-                'display': 'block'
-            });
-
-            for (let i =0 ; i < arrayNumeros.length; i++){
-                $('#numerosGenerados').append(arrayNumeros[i])
-            }
 
             var cant = $('#cantMarcas').val();
-            cant = parseInt(cant);
-            var arrayProbabilidades = [];
-            var arrayMC = [];
+
+            var suma = 0;
             for (let i = 0; i < cant; i++) {
-                arrayProbabilidades.push($("#probabilidad" + i).val());
-                arrayMC.push($("#marcaClase" + i).val())
+                var aux = $('#probabilidad'+i+'').val(); 
+                suma += parseInt(aux);
             }
-            console.log(arrayProbabilidades);
-            console.log(arrayMC);
-            console.log(calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades));
-            var resultadosMC = calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades);
-            $('#trHeaderMC').append('<td></td>')
-            for (let i = 0; i < cant; i++) {
-                $('#trHeaderMC').append('' +
-                    '<td>' + arrayMC[i] + '</td>'
-                    + '');
-            }
-            var titulos = ["Acumulada","Minimos", "Maximos"];
-            for (let i = 0; i < 3; i++) {
-                $('#tablaMC tbody').append('<tr>');
-                    $('#tablaMC tbody').append('<td class="table-info text-center">'+titulos[i]+'</td>')
-                for (let j = 0; j < cant; j++) {
-                        $('#tablaMC tbody').append(''+
-                            '<td class="text-right">'+resultadosMC[i][j]+'</td>'
-                        +'');
+            if(suma == 100){
+                $('#tablaMC').css({
+                    'display': 'block'
+                });
+                $('#tablaMC2').css({
+                    'display': 'block'
+                });
+                $('#alerta').css({
+                    'display': 'none'
+                });
+                
+                cant = parseInt(cant);
+                var arrayProbabilidades = [];
+                var arrayMC = [];
+                for (let i = 0; i < cant; i++) {
+                    arrayProbabilidades.push($("#probabilidad" + i).val());
+                    arrayMC.push($("#marcaClase" + i).val())
                 }
-                $('#tablaMC tbody').append('</tr>');
-            }
+                console.log(arrayProbabilidades);
+                console.log(arrayMC);
+                console.log(calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades));
+                var resultadosMC = calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades);
 
-
-            for (let i = 0; i < cant; i++) {
-                $('#tablaMC2 tbody').append('<tr>');
-                    $('#tablaMC2 tbody').append('<td class="table-info text-center">'+arrayMC[i]+'</td>');
-                for (let j = 3; j < 6; j++) {
-                        $('#tablaMC2 tbody').append(''+
-                            '<td class="text-right">'+resultadosMC[j][i]+'</td>'
-                        +'');
+                $('#trHeaderMC').html('');
+                $('#trHeaderMC').append('<td></td>')
+                for (let i = 0; i < cant; i++) {
+                    $('#trHeaderMC').append('' +
+                        '<td>' + arrayMC[i] + '</td>'
+                        + '');
                 }
-                $('#tablaMC2 tbody').append('</tr>');
+                var titulos = ["Acumulada","Minimos", "Maximos"];
+                $('#tablaMC tbody').html('');
+                for (let i = 0; i < 3; i++) {
+                    $('#tablaMC tbody').append('<tr>');
+                        $('#tablaMC tbody').append('<td class="table-info text-center">'+titulos[i]+'</td>')
+                    for (let j = 0; j < cant; j++) {
+                            $('#tablaMC tbody').append(''+
+                                '<td class="text-right">'+resultadosMC[i][j]+'</td>'
+                            +'');
+                    }
+                    $('#tablaMC tbody').append('</tr>');
+                }
+
+
+                $('#tablaMC2 tbody').html('');
+                for (let i = 0; i < cant; i++) {
+                    $('#tablaMC2 tbody').append('<tr>');
+                        $('#tablaMC2 tbody').append('<td class="table-info text-center">'+arrayMC[i]+'</td>');
+                    for (let j = 3; j < 6; j++) {
+                            $('#tablaMC2 tbody').append(''+
+                                '<td class="text-right">'+resultadosMC[j][i]+'</td>'
+                            +'');
+                    }
+                    $('#tablaMC2 tbody').append('</tr>');
+                }
+
+            }else{
+                $('#alerta').css({
+                    'display': 'block'
+                });
+                $('#alerta').html('La suma total de las probabilidades debe ser igual 100% ');
+
             }
+            
+            
 
 
+        }
+    </script>
+    <script>
+        function limpiar(){
+            $('#entradas').find('input').val('');
+            $('#tablaMC').css({
+                'display': 'none'
+            });
+            $('#tablaMC2').css({
+                'display': 'none'
+            });
+            $('#alerta').css({
+                'display': 'none'
+            });
         }
     </script>
 </body>

@@ -252,8 +252,11 @@
                         </div>
                         <small id="errorIteraciones2" class="form-text text-danger"></small>
                         <br>
-                        <button type="button" onclick="obtenerValoresCongruencia()" class="btn btn-primary">Generar</button>
-                        <button type="button" onclick="limpiarCongruencia()" class="btn btn-light">Limpiar todo</button>
+                        <div class="row">
+                            <button type="button" onclick="obtenerValoresCongruencia()" class="btn btn-primary ml-3">Generar</button>
+                            <button type="button" class="btn btn-success ml-2" onclick="openwindow2()" id="botonMarcaClaseCongru" style="display: none;">Marcas de clase</button>
+                            <button type="button" onclick="limpiarCongruencia()" class="btn btn-light ml-2">Limpiar todo</button>
+                        </div>
                         <br>
                         <br>
                         <div class="card bg-light mb-3" id="cardResultadoCongruencia" style="display: none;">
@@ -526,6 +529,9 @@
             $('#testAleatoriedadCongru').css({
                 display: "block"
             })
+            $('#botonMarcaClaseCongru').css({
+                    display: "block"
+            });
             var tablaChi = getTabla() ;
             for (let i = 0; i < tablaChi.length; i++) {
                 $("#selectCongru").append('<option value="'+tablaChi[i][0]+'">'+tablaChi[i][0]+'</option>');
@@ -549,6 +555,26 @@
             }
         }
 
+
+    }
+
+    function openwindow2(){
+        var semilla = $('#semilla2').val();
+        var a = $('#valorA').val();
+        var c = $('#valorC').val();
+        var m = $('#valorM').val();
+        var iteraciones = $('#iteracionesCM').val();
+        var arregloResultadoCongruencia = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
+        var arregloResultadoCongruenciaAux = [];
+        for (let i = 0; i < arregloResultadoCongruencia.length; i++) {
+            arregloResultadoCongruenciaAux.push(arregloResultadoCongruencia[i][1]);
+        }
+
+        var x = separar(arregloResultadoCongruenciaAux) ;
+
+        sessionStorage.setItem("arreglo", x);
+
+        myWindow = window.open("./marcaClase.html", "Ventana2");
 
     }
 
