@@ -12,7 +12,7 @@ function calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades) {
     for (let i = 0; i < arrayProbabilidades.length; i++) {
         //Calculamos lo acumulado
         arrayAcumulado.push(parseInt(auxAcu) + parseInt(arrayProbabilidades[i]));
-        arrayMaximos.push(parseInt(arrayAcumulado[i])/10);
+        arrayMaximos.push(parseInt(arrayAcumulado[i]));
         auxAcu = parseInt(auxAcu) + parseInt(arrayProbabilidades[i]);
 
 
@@ -22,7 +22,7 @@ function calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades) {
         
 
         //Actualizamos los minimos
-        min = arrayMaximos[i]+0.1;
+        min = arrayMaximos[i]+1;
 
     }
     arrayRetorno.push(arrayAcumulado);
@@ -65,7 +65,7 @@ function calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades) {
     //Obtenidas
     arrayObtenidas = [];
     for (let i = 0; i < arrayApariciones.length; i++) {
-        arrayObtenidas.push((parseInt(arrayApariciones[i]) / parseFloat(arrayNumeros.length)*100));
+        arrayObtenidas.push((parseInt(arrayApariciones[i]) / parseFloat(arrayNumeros.length)*100).toFixed(3));
     }
 
     //Cargamos las obtenidas
