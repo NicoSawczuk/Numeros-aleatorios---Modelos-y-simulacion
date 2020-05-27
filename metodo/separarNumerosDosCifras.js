@@ -4,9 +4,6 @@ function separarArrayN(array, n) {
         arrayString.push(String(array[index]));
     }
 
-    console.log(n);
-    console.log(arrayString);
-    console.log(arrayString.length);
 
     var arrayRetorno = [];
     
@@ -21,7 +18,6 @@ function separarArrayN(array, n) {
 
     }
 
-    console.log(arrayRetorno);
 
     return arrayRetorno;
 }

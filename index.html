@@ -12,6 +12,7 @@
     <script src="./metodo/vonNeuman.js"></script>
     <script src="./metodo/congruenciaMixto.js"></script>
     <script src="./metodo/separarNumeros.js"></script>
+    <script src="./metodo/separarNumerosDosCifras.js"></script>
 
     <!-- Importamos los scripts de los test de aleatoriedad -->
     <script src="./testAleatoriedad/chiCuadrado.js"></script>
@@ -598,10 +599,8 @@
                 arregloResultadoVonNeumanAux.push(arregloResultado[i][1])
             }
         }
+        var x = separarArrayN(arregloResultadoVonNeumanAux,2);
 
-        var x = separar(arregloResultadoVonNeumanAux);
-
-        console.log(typeof (x));
         //Obtenemos el máximo y el mínimo y ajustamos el array
         var min = $('#minimoVonNeuman').val();
         var max = $('#maximoVonNeuman').val();
@@ -708,10 +707,10 @@
                 arregloResultadoCongruenciaAux.push(arregloResultadoCongruencia[i][1]);
             }
 
-            var x = separar(arregloResultadoCongruenciaAux);
+            var x = separarArrayN(arregloResultadoCongruenciaAux,2);
 
 
-            console.log(typeof (x));
+            console.log(x);
             //Obtenemos el máximo y el mínimo y ajustamos el array
             var min = $('#minimoCongru').val();
             var max = $('#maximoCongru').val();
