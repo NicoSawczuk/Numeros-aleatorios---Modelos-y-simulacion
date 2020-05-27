@@ -91,9 +91,8 @@
         $(document).ready(function () {
             var controls = sessionStorage.getItem("arreglo");
             var arrayNumeros = controls.split(",");
-            var s = separarArrayN(arrayNumeros,2);
-            for (let i = 0; i < s.length; i++) {
-                $('#numerosGenerados').append(s[i]+', ');
+            for (let i = 0; i < arrayNumeros.length; i++) {
+                $('#numerosGenerados').append(arrayNumeros[i]+', ')
             }
 
         });

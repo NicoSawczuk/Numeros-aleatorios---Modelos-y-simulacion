@@ -97,24 +97,20 @@
                                         style="width: 150px;">Minimo</span>
                                 </div>
                                 <input type="number" class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default"
-                                    placeholder="Ingrese el mínimo"
+                                    aria-describedby="inputGroup-sizing-default" placeholder="Ingrese el mínimo"
                                     id="minimoVonNeuman">
                             </div>
-                            <small id="errorMinimoVonNeuman" class="form-text text-danger"></small>
                             <div class="input-group col col-md-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default"
                                         style="width: 150px;">Maximo</span>
                                 </div>
                                 <input type="number" class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default"
-                                    placeholder="Ingrese el máximo"
+                                    aria-describedby="inputGroup-sizing-default" placeholder="Ingrese el máximo"
                                     id="maximoVonNeuman">
                             </div>
-                            <small id="errorMaximoVonNeuman" class="form-text text-danger"></small>
                         </div>
-                        
+                        <small id="errorMinimoMaximoVonNeuman" class="form-text text-danger"></small>                        
                         <br>
                         <div class="row">
                             <button type="button" onclick="obtenerValores()"
@@ -326,6 +322,29 @@
                             </div>
                         </div>
                         <small id="errorIteraciones2" class="form-text text-danger"></small>
+                        <br>
+                        <div class="row">
+                            <div class="input-group col col-md-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Minimo</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default" placeholder="Ingrese el mínimo"
+                                    id="minimoCongru">
+                            </div>
+                            <div class="input-group col col-md-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Maximo</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default" placeholder="Ingrese el máximo"
+                                    id="maximoCongru">
+                            </div>
+                            
+                        </div>
+                        <small id="errorMinimoMaximoCongru" class="form-text text-danger"></small>
                         <br>
                         <div class="row">
                             <button type="button" onclick="obtenerValoresCongruencia()"
@@ -557,6 +576,18 @@
         });
     }
 
+    function validarMinMaxVonNeumann(min, max){
+
+        if (min == "" || max == "") {
+            return 0;
+        }
+
+        if (parseInt(max) < parseInt(min)) {
+            return 1;
+        }
+        return 2;
+    }
+
     function openwindow() {
         var semilla = $('#semilla').val();
         var n = document.getElementById("iteraciones").value;
@@ -570,15 +601,24 @@
 
         var x = separar(arregloResultadoVonNeumanAux);
 
-        console.log(typeof(x));
+        console.log(typeof (x));
         //Obtenemos el máximo y el mínimo y ajustamos el array
         var min = $('#minimoVonNeuman').val();
         var max = $('#maximoVonNeuman').val();
-        var z = ajustar([1,30,20,43,35], min, max)
 
-        sessionStorage.setItem("arreglo", z);
-
-        myWindow = window.open("./marcaClase.html", "Ventana");
+        if(validarMinMaxVonNeumann(min, max) == 2){
+            $('#errorMinimoMaximoVonNeuman').html('');
+            var z = ajustar(x, min, max)
+            sessionStorage.setItem("arreglo", z);
+            myWindow = window.open("./marcaClase.html", "Ventana");
+        }else{
+            if (validarMinMaxVonNeumann(min, max) == 0){
+                $('#errorMinimoMaximoVonNeuman').html('Debe ingresar el minimo y el maximo');
+            }
+            if (validarMinMaxVonNeumann(min, max) == 1){
+                $('#errorMinimoMaximoVonNeuman').html('El minimo no puede ser mayor al maximo');
+            }
+        }
     }
 
 
@@ -595,6 +635,7 @@
         $('#errorValorA').html('');
         $('#errorValorC').html('');
         $('#errorValorM').html('');
+
 
         $('#errorIteraciones2').html('');
         if (this.validarSemilla() == 1 && this.validarA() == 1 && this.validarC() == 1 && this.validarM() == 1 && this.validarIteraciones() == 1) {
@@ -647,29 +688,43 @@
             if (this.validarIteraciones() != 1) {
                 $('#errorIteraciones2').html(validarIteraciones);
             }
+
         }
 
 
     }
 
     function openwindow2() {
-        var semilla = $('#semilla2').val();
-        var a = $('#valorA').val();
-        var c = $('#valorC').val();
-        var m = $('#valorM').val();
-        var iteraciones = $('#iteracionesCM').val();
-        var arregloResultadoCongruencia = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
-        var arregloResultadoCongruenciaAux = [];
-        for (let i = 0; i < arregloResultadoCongruencia.length; i++) {
-            arregloResultadoCongruenciaAux.push(arregloResultadoCongruencia[i][1]);
+        if (validarMinMax() == 1) {
+            $('#errorMinimoMaximoCongru').html('');
+            var semilla = $('#semilla2').val();
+            var a = $('#valorA').val();
+            var c = $('#valorC').val();
+            var m = $('#valorM').val();
+            var iteraciones = $('#iteracionesCM').val();
+            var arregloResultadoCongruencia = metodoCongruenciaMixto(semilla, a, c, m, iteraciones);
+            var arregloResultadoCongruenciaAux = [];
+            for (let i = 0; i < arregloResultadoCongruencia.length; i++) {
+                arregloResultadoCongruenciaAux.push(arregloResultadoCongruencia[i][1]);
+            }
+
+            var x = separar(arregloResultadoCongruenciaAux);
+
+
+            console.log(typeof (x));
+            //Obtenemos el máximo y el mínimo y ajustamos el array
+            var min = $('#minimoCongru').val();
+            var max = $('#maximoCongru').val();
+            var z = ajustar(x, min, max)
+
+            sessionStorage.setItem("arreglo", z);
+
+            myWindow = window.open("./marcaClase.html", "Ventana2");
+        } else {
+            if (this.validarMinMax() != 1) {
+                $('#errorMinimoMaximoCongru').html(validarMinMax);
+            }
         }
-
-        var x = separar(arregloResultadoCongruenciaAux);
-
-        sessionStorage.setItem("arreglo", x);
-
-        myWindow = window.open("./marcaClase.html", "Ventana2");
-
     }
 
 
@@ -768,6 +823,20 @@
         iteraciones = parseInt(iteraciones);
         if (iteraciones <= 0) {
             return 'Debe ingresar un numero mayor a cero';
+        }
+        return 1;
+    }
+
+    function validarMinMax() {
+        var min = $('#minimoCongru').val();
+        var max = $('#maximoCongru').val();
+
+        if (min == "" || max == "") {
+            return 'Debe ingresar un minimo y un maximo';
+        }
+
+        if (parseInt(max) < parseInt(min)) {
+            return 'El mínimo no puede ser mayor que el máximo';
         }
         return 1;
     }
