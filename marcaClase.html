@@ -8,6 +8,7 @@
     <script src="./static/jquery/jquery-3.5.0.min.js"></script>
     <script src="./static/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
     <script src="./static/chartsjs/Chart.min.js"></script>
+    <script src="./metodo/separarNumerosDosCifras.js"></script>
 
     <!-- Importamos los scripts -->
     <script src="./metodo/marcaClase.js"></script>
@@ -70,8 +71,8 @@
                         <tr id="trHeaderMC2">
                             <td>MC</td>
                             <td>Apariciones</td>
-                            <td>Esperadas</td>
-                            <td>Obtenidas</td>
+                            <td>Esperadas(%)</td>
+                            <td>Obtenidas(%)</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,8 +91,9 @@
         $(document).ready(function () {
             var controls = sessionStorage.getItem("arreglo");
             var arrayNumeros = controls.split(",");
-            for (let i = 0; i < arrayNumeros.length; i++) {
-                $('#numerosGenerados').append(arrayNumeros[i]+', ')
+            var s = separarArrayN(arrayNumeros,2);
+            for (let i = 0; i < s.length; i++) {
+                $('#numerosGenerados').append(s[i]+', ');
             }
 
         });
@@ -163,8 +165,9 @@
                 }
                 console.log(arrayProbabilidades);
                 console.log(arrayMC);
-                console.log(calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades));
-                var resultadosMC = calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades);
+                var arrayDos = separarArrayN(arrayNumeros, 2); 
+                console.log(calcularMarcaClase(arrayDos, arrayMC, arrayProbabilidades));
+                var resultadosMC = calcularMarcaClase(arrayDos, arrayMC, arrayProbabilidades);
 
                 $('#trHeaderMC').html('');
                 $('#trHeaderMC').append('<td></td>')
@@ -258,7 +261,21 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Resultados esperados y obtenidos'
+                        text: 'Resultados esperados y obtenidos'   
+                    },
+                    scales: {
+                        yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Valor por Marca de Clase'
+                        }
+                        }],
+                        xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Marcas de Clase'
+                        }
+                        }]
                     }
                 }
             });
