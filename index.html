@@ -25,40 +25,52 @@
         <div class="card-header" style="background-color: rgb(169, 211, 255, 0.8);"><b>Métodos para calcular numeros
                 pseudoaleatorios</b></div>
         <div class="card-body">
-            <p class="text-muted card-title">Para utilizar los generadores de números pseudoaleatorios basta con seleccionar el método a utilizar y completar los campos solicitados por el método. <br> Luego de cargar los datos solicitados, presionar en el botón <b>Generar.</b> <br> Si
+            <p class="text-muted card-title">Para utilizar los generadores de números pseudoaleatorios basta con
+                seleccionar el método a utilizar y completar los campos solicitados por el método. <br> Luego de cargar
+                los datos solicitados, presionar en el botón <b>Generar.</b> <br> Si
                 desea eliminar los numeros generados, presionar el boton <b>Limpiar Todo.</b></p>
             <br>
             <div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="vonNeuman-tab" data-toggle="tab" href="#vonNeuman" role="tab" aria-controls="vonNeuman" aria-selected="true">Von Neumann</a>
+                        <a class="nav-link active" id="vonNeuman-tab" data-toggle="tab" href="#vonNeuman" role="tab"
+                            aria-controls="vonNeuman" aria-selected="true">Von Neumann</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="congruenciaMixto-tab" data-toggle="tab" href="#congruenciaMixto" role="tab" aria-controls="congruenciaMixto" aria-selected="false">Congruencia Mixto</a>
+                        <a class="nav-link" id="congruenciaMixto-tab" data-toggle="tab" href="#congruenciaMixto"
+                            role="tab" aria-controls="congruenciaMixto" aria-selected="false">Congruencia Mixto</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="vonNeuman" role="tabpanel" aria-labelledby="vonNeuman-tab">
+                    <div class="tab-pane fade show active" id="vonNeuman" role="tabpanel"
+                        aria-labelledby="vonNeuman-tab">
                         <br>
                         <p class="text-muted card-title">
-                            Primer método aritmético para generar números pseudoaleatorios. Desarrollado por Von Neumann y Metropolis en 1946.
+                            Primer método aritmético para generar números pseudoaleatorios. Desarrollado por Von Neumann
+                            y Metropolis en 1946.
                             <br> Consiste en:
                             <br>
-                            <b>1.</b> Tomar un número cualquiera de 4 (cuatro) dígitos y asignarlo al primer elemento (semilla) de la serie, x1. <br>
-                            <b>2.</b> Elevarlo al cuadrado y completar 8 (ocho) cifras, si fuera necesario con ceros a la izquierda. <br>
+                            <b>1.</b> Tomar un número cualquiera de 4 (cuatro) dígitos y asignarlo al primer elemento
+                            (semilla) de la serie, x1. <br>
+                            <b>2.</b> Elevarlo al cuadrado y completar 8 (ocho) cifras, si fuera necesario con ceros a
+                            la izquierda. <br>
                             <b>3.</b> Descartar los 2 (dos) primeros dígitos, al igual que los 2 (dos) últimos. <br>
                             <b>4.</b> Tomar los 4 (cuatro) dígitos centrales como elemento siguiente de la sucesión, x2.
                             <br>
-                            <b>5.</b> Repetir los pasos del 2 al 4 n veces, siendo n la cantidad de nros pseudoaleatorios a generar </p>
+                            <b>5.</b> Repetir los pasos del 2 al 4 n veces, siendo n la cantidad de nros
+                            pseudoaleatorios a generar </p>
                         <hr>
                         <h5>Generador</h5>
                         <br>
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 150px;">Número inicial</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Número inicial</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número cualquiera de 4 cifras" id="semilla">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un número cualquiera de 4 cifras" id="semilla">
                             </div>
                         </div>
                         <small id="errorSemilla" class="form-text text-danger"></small>
@@ -67,16 +79,48 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 150px;">Cant. de números</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Cant. de números</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un numero que indique la cantidad de numeros pseudoaleatorios a generar" id="iteraciones">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un numero que indique la cantidad de numeros pseudoaleatorios a generar"
+                                    id="iteraciones">
                             </div>
                         </div>
                         <small id="errorIteraciones" class="form-text text-danger"></small>
                         <br>
                         <div class="row">
-                            <button type="button" onclick="obtenerValores()" class="btn btn-primary ml-3">Generar</button>
-                            <button type="button" class="btn btn-success ml-2" onclick="openwindow()" id="botonMarcaClase" style="display: none;">Marcas de clase</button>
+                            <div class="input-group col col-md-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Minimo</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese el mínimo"
+                                    id="minimoVonNeuman">
+                            </div>
+                            <small id="errorMinimoVonNeuman" class="form-text text-danger"></small>
+                            <div class="input-group col col-md-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 150px;">Maximo</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese el máximo"
+                                    id="maximoVonNeuman">
+                            </div>
+                            <small id="errorMaximoVonNeuman" class="form-text text-danger"></small>
+                        </div>
+                        
+                        <br>
+                        <div class="row">
+                            <button type="button" onclick="obtenerValores()"
+                                class="btn btn-primary ml-3">Generar</button>
+                            <button type="button" class="btn btn-success ml-2" onclick="openwindow()"
+                                id="botonMarcaClase" style="display: none;">Marcas de clase</button>
                             <button type="button" onclick="limpiar()" class="btn btn-light ml-2">Limpiar todo</button>
                             <br>
                         </div>
@@ -112,84 +156,100 @@
                                 <div class="row">
                                     <div class="col-11">
                                         Test de aleatoriedad
-                                    </div>        
+                                    </div>
                                     <div class="col-1 text-right">
-                                        <button class="btn btn-sm btn-light" data-toggle="modal" id="btn1" data-target=".bd-example-modal-xl">Tablas</button>
+                                        <button class="btn btn-sm btn-light" data-toggle="modal" id="btn1"
+                                            data-target=".bd-example-modal-xl">Tablas</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Realizar test de aleatoriedad</h5>
                                 <p class="card-text">
-                                    Para realizar los test de aleatoriedad presione en el botón del test que desee realizar.<br>
-                                    Luego de obtener los resultados, presione en el botón “Tablas” y compare los resultados para concluir con sus hipótesis.<br>
-                                    Para el caso de Chi cuadrado, el resultado de la hipotesis se vera al final de su tabla.
+                                    Para realizar los test de aleatoriedad presione en el botón del test que desee
+                                    realizar.<br>
+                                    Luego de obtener los resultados, presione en el botón “Tablas” y compare los
+                                    resultados para concluir con sus hipótesis.<br>
+                                    Para el caso de Chi cuadrado, el resultado de la hipotesis se vera al final de su
+                                    tabla.
                                 </p>
                                 <p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <button id="botonTestRachasVonNeuman" type="button" class="btn btn-outline-primary" onclick="mostarRachaVonNeuman()">Rachas</button>
-                                        </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="botonTestRachasVonNeuman" type="button"
+                                            class="btn btn-outline-primary"
+                                            onclick="mostarRachaVonNeuman()">Rachas</button>
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <div id="resultadoRachaVonNeuman" class="alert alert-info" role="alert" style="display: none; width: 100%;">
-                                           
-                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div id="resultadoRachaVonNeuman" class="alert alert-info" role="alert"
+                                        style="display: none; width: 100%;">
+
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <label for="">Seleccione un procentaje de aceptacion</label>
-                                            <select name="" id="selectVonNeuman" class="custom-select">
-                                            </select>
-                                        </div>
-                                        <div class="col-4 mt-4" >
-                                            <button id="botonTestChiCuadradoVonNeuman" style="margin-top: 7px;" type="button" class="btn btn-outline-primary" onclick="mostrarChiCuadrado()">Chi cuadrado</button>
-                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="">Seleccione un procentaje de aceptacion</label>
+                                        <select name="" id="selectVonNeuman" class="custom-select">
+                                        </select>
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <table id="tablaChiCuadradoVonNeuman" class="table table-striped table-bordered">
-                                            <thead class="table-info text-center">
-                                                <tr>
-                                                    <td>
-                                                        Digito
-                                                    </td>
-                                                    <td>
-                                                        f<sub>i</sub>
-                                                    </td>
-                                                    <td>
-                                                        np<sub>i</sub>
-                                                    </td>
-                                                    <td>
-                                                        f<sub>i</sub> - np<sub>i</sub>
-                                                    </td>
-                                                    <td>
-                                                        (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup>
-                                                    </td>
-                                                    <td>
-                                                        (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup> / np<sub>i</sub>
-                                                    </td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                    <div class="col-4 mt-4">
+                                        <button id="botonTestChiCuadradoVonNeuman" style="margin-top: 7px;"
+                                            type="button" class="btn btn-outline-primary"
+                                            onclick="mostrarChiCuadrado()">Chi cuadrado</button>
                                     </div>
-                                    <div class="row">
-                                        <div id="resultadoChiVonNeuman" class="alert alert-info" role="alert" style="display: none; width: 100%;">
-                                           
-                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <table id="tablaChiCuadradoVonNeuman" class="table table-striped table-bordered">
+                                        <thead class="table-info text-center">
+                                            <tr>
+                                                <td>
+                                                    Digito
+                                                </td>
+                                                <td>
+                                                    f<sub>i</sub>
+                                                </td>
+                                                <td>
+                                                    np<sub>i</sub>
+                                                </td>
+                                                <td>
+                                                    f<sub>i</sub> - np<sub>i</sub>
+                                                </td>
+                                                <td>
+                                                    (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup>
+                                                </td>
+                                                <td>
+                                                    (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup> / np<sub>i</sub>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div id="resultadoChiVonNeuman" class="alert alert-info" role="alert"
+                                        style="display: none; width: 100%;">
+
                                     </div>
+                                </div>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="congruenciaMixto" role="tabpanel" aria-labelledby="congruenciaMixto-tab">
+                    <div class="tab-pane fade" id="congruenciaMixto" role="tabpanel"
+                        aria-labelledby="congruenciaMixto-tab">
                         <br>
                         <p class="text-muted card-title">
-                            Los generadores congruenciales lineales generan una secuencia de números pseudoaleatorios en la cual el próximo número pseudoaleatorio es determinado a partir del último número generado, es decir, el número pseudoaleatorio <b>X<sub>n+1</sub></b>                            es derivado a partir del número pseudoaleatorio <b>X<sub>n</sub></b>. La relación de recurrencia para el generador congruencial mixto es <b>X<sub>n+1</sub> = (aX<sub>n</sub> + c) mod m</b>, en donde:
+                            Los generadores congruenciales lineales generan una secuencia de números pseudoaleatorios en
+                            la cual el próximo número pseudoaleatorio es determinado a partir del último número
+                            generado, es decir, el número pseudoaleatorio <b>X<sub>n+1</sub></b> es derivado a partir
+                            del número pseudoaleatorio <b>X<sub>n</sub></b>. La relación de recurrencia para el
+                            generador congruencial mixto es <b>X<sub>n+1</sub> = (aX<sub>n</sub> + c) mod m</b>, en
+                            donde:
                         </p>
                         <ul class="text-muted">
                             <li>X<sub>0</sub> = es la semilla</li>
@@ -205,9 +265,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default" style="width: 180px;">Semilla (X<sub>0</sub>)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default"
+                                        style="width: 180px;">Semilla (X<sub>0</sub>)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número cualquiera" id="semilla2">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un número cualquiera" id="semilla2">
                             </div>
                         </div>
                         <small id="errorSemilla2" class="form-text text-danger"></small>
@@ -215,9 +278,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default2" style="width: 180px;">Multiplicador (a)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default2"
+                                        style="width: 180px;">Multiplicador (a)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero impar no divisible por 3 o 5" id="valorA">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un entero impar no divisible por 3 o 5" id="valorA">
                             </div>
                         </div>
                         <small id="errorValorA" class="form-text text-danger"></small>
@@ -225,9 +291,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default3" style="width: 180px;">Constante Aditiva (c)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default3"
+                                        style="width: 180px;">Constante Aditiva (c)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero impar no relativamente primo a M " id="valorC">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un entero impar no relativamente primo a M " id="valorC">
                             </div>
                         </div>
                         <small id="errorValorC" class="form-text text-danger"></small>
@@ -235,9 +304,12 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default4" style="width: 180px;">Modulo (m)</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default4"
+                                        style="width: 180px;">Modulo (m)</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un entero mayor a semilla, a y c" id="valorM">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese un entero mayor a semilla, a y c" id="valorM">
                             </div>
                         </div>
                         <small id="errorValorM" class="form-text text-danger"></small>
@@ -245,17 +317,23 @@
                         <div class="row">
                             <div class="input-group col col-md-8">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default4" style="width: 180px;">Iteraciones</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default4"
+                                        style="width: 180px;">Iteraciones</span>
                                 </div>
-                                <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Ingrese el numero de iteraciones" id="iteracionesCM">
+                                <input type="number" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    placeholder="Ingrese el numero de iteraciones" id="iteracionesCM">
                             </div>
                         </div>
                         <small id="errorIteraciones2" class="form-text text-danger"></small>
                         <br>
                         <div class="row">
-                            <button type="button" onclick="obtenerValoresCongruencia()" class="btn btn-primary ml-3">Generar</button>
-                            <button type="button" class="btn btn-success ml-2" onclick="openwindow2()" id="botonMarcaClaseCongru" style="display: none;">Marcas de clase</button>
-                            <button type="button" onclick="limpiarCongruencia()" class="btn btn-light ml-2">Limpiar todo</button>
+                            <button type="button" onclick="obtenerValoresCongruencia()"
+                                class="btn btn-primary ml-3">Generar</button>
+                            <button type="button" class="btn btn-success ml-2" onclick="openwindow2()"
+                                id="botonMarcaClaseCongru" style="display: none;">Marcas de clase</button>
+                            <button type="button" onclick="limpiarCongruencia()" class="btn btn-light ml-2">Limpiar
+                                todo</button>
                         </div>
                         <br>
                         <br>
@@ -290,74 +368,83 @@
                                         Test de aleatoriedad
                                     </div>
                                     <div class="col-1 text-right">
-                                        <button class="btn btn-sm btn-light" data-toggle="modal" id="btn1" data-target=".bd-example-modal-xl">Tablas</button>
+                                        <button class="btn btn-sm btn-light" data-toggle="modal" id="btn1"
+                                            data-target=".bd-example-modal-xl">Tablas</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Realizar test de aleatoriedad</h5>
                                 <p class="card-text">
-                                    Para realizar los test de aleatoriedad presione en el botón del test que desee realizar.<br>
-                                    Luego de obtener los resultados, presione en el botón “Tablas” y compare los resultados para concluir con sus hipótesis.<br>
-                                    Para el caso de Chi cuadrado, el resultado de la hipotesis se vera al final de su tabla.
+                                    Para realizar los test de aleatoriedad presione en el botón del test que desee
+                                    realizar.<br>
+                                    Luego de obtener los resultados, presione en el botón “Tablas” y compare los
+                                    resultados para concluir con sus hipótesis.<br>
+                                    Para el caso de Chi cuadrado, el resultado de la hipotesis se vera al final de su
+                                    tabla.
                                 </p>
                                 <p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <button id="botonTestRachasCongru" type="button" class="btn btn-outline-primary" onclick="mostrarRachaCongru()">Rachas</button>
-                                        </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="botonTestRachasCongru" type="button" class="btn btn-outline-primary"
+                                            onclick="mostrarRachaCongru()">Rachas</button>
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <div id="resultadoRachaCongru" class="alert alert-info" role="alert" style="display: none; width: 100%;">
-                                           
-                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div id="resultadoRachaCongru" class="alert alert-info" role="alert"
+                                        style="display: none; width: 100%;">
+
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <label for="">Seleccione un procentaje de aceptacion</label>
-                                            <select name="" id="selectCongru" class="custom-select">
-                                            </select>
-                                        </div>
-                                        <div class="col-4 mt-4" >
-                                            <button id="botonTestChiCuadradoCongru" style="margin-top: 7px;" type="button" class="btn btn-outline-primary" onclick="mostrarChiCuadradoCongru()">Chi cuadrado</button>
-                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="">Seleccione un procentaje de aceptacion</label>
+                                        <select name="" id="selectCongru" class="custom-select">
+                                        </select>
                                     </div>
-                                    <br>
-                                    <div class="row">
-                                        <table id="tablaChiCuadradoCongru" class="table table-striped table-bordered">
-                                            <thead class="table-info text-center">
-                                                <tr>
-                                                    <td>
-                                                        Digito
-                                                    </td>
-                                                    <td>
-                                                        f<sub>i</sub>
-                                                    </td>
-                                                    <td>
-                                                        np<sub>i</sub>
-                                                    </td>
-                                                    <td>
-                                                        f<sub>i</sub> - np<sub>i</sub>
-                                                    </td>
-                                                    <td>
-                                                        (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup>
-                                                    </td>
-                                                    <td>
-                                                        (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup> / np<sub>i</sub>
-                                                    </td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                    <div class="col-4 mt-4">
+                                        <button id="botonTestChiCuadradoCongru" style="margin-top: 7px;" type="button"
+                                            class="btn btn-outline-primary" onclick="mostrarChiCuadradoCongru()">Chi
+                                            cuadrado</button>
                                     </div>
-                                    <div class="row">
-                                        <div id="resultadoChiCongru" class="alert alert-info" role="alert" style="display: none; width: 100%;">
-                                           
-                                        </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <table id="tablaChiCuadradoCongru" class="table table-striped table-bordered">
+                                        <thead class="table-info text-center">
+                                            <tr>
+                                                <td>
+                                                    Digito
+                                                </td>
+                                                <td>
+                                                    f<sub>i</sub>
+                                                </td>
+                                                <td>
+                                                    np<sub>i</sub>
+                                                </td>
+                                                <td>
+                                                    f<sub>i</sub> - np<sub>i</sub>
+                                                </td>
+                                                <td>
+                                                    (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup>
+                                                </td>
+                                                <td>
+                                                    (f<sub>i</sub> - np<sub>i</sub>)<sup>2</sup> / np<sub>i</sub>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div id="resultadoChiCongru" class="alert alert-info" role="alert"
+                                        style="display: none; width: 100%;">
+
                                     </div>
+                                </div>
                                 </p>
                             </div>
                         </div>
@@ -367,17 +454,18 @@
         </div>
     </div>
     </div>
-    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <h3>Tabla de Racha</h3>
-            <img src="static/tablas/rachas.png" width="60%" height="40%">
-            <h3>Tabla de Chi Cuadrado</h3>
-            <img src="static/tablas/chi1.png" alt="">
-            <img src="static/tablas/chi2.png" alt="">
-            <img src="static/tablas/chi3.png" alt="">
-            <img src="static/tablas/chi4.png" alt="">
-          </div>
+            <div class="modal-content">
+                <h3>Tabla de Racha</h3>
+                <img src="static/tablas/rachas.png" width="60%" height="40%">
+                <h3>Tabla de Chi Cuadrado</h3>
+                <img src="static/tablas/chi1.png" alt="">
+                <img src="static/tablas/chi2.png" alt="">
+                <img src="static/tablas/chi3.png" alt="">
+                <img src="static/tablas/chi4.png" alt="">
+            </div>
         </div>
     </div>
 
@@ -438,10 +526,10 @@
                             display: "block"
                         });
 
-                        var tablaChi = getTabla() ;
+                        var tablaChi = getTabla();
                         for (let i = 0; i < tablaChi.length; i++) {
-                            $("#selectVonNeuman").append('<option value="'+tablaChi[i][0]+'">'+tablaChi[i][0]+'</option>');
-                            
+                            $("#selectVonNeuman").append('<option value="' + tablaChi[i][0] + '">' + tablaChi[i][0] + '</option>');
+
                         }
                     }
                 }
@@ -465,7 +553,7 @@
             display: "none"
         });
         $('#resultadoChiVonNeuman').css({
-            display: "none" 
+            display: "none"
         });
     }
 
@@ -479,15 +567,21 @@
                 arregloResultadoVonNeumanAux.push(arregloResultado[i][1])
             }
         }
-        
+
         var x = separar(arregloResultadoVonNeumanAux);
 
-        sessionStorage.setItem("arreglo", x);
+        console.log(typeof(x));
+        //Obtenemos el máximo y el mínimo y ajustamos el array
+        var min = $('#minimoVonNeuman').val();
+        var max = $('#maximoVonNeuman').val();
+        var z = ajustar([1,30,20,43,35], min, max)
+
+        sessionStorage.setItem("arreglo", z);
 
         myWindow = window.open("./marcaClase.html", "Ventana");
     }
 
-  
+
 
 </script>
 <script>
@@ -530,12 +624,12 @@
                 display: "block"
             })
             $('#botonMarcaClaseCongru').css({
-                    display: "block"
+                display: "block"
             });
-            var tablaChi = getTabla() ;
+            var tablaChi = getTabla();
             for (let i = 0; i < tablaChi.length; i++) {
-                $("#selectCongru").append('<option value="'+tablaChi[i][0]+'">'+tablaChi[i][0]+'</option>');
-                
+                $("#selectCongru").append('<option value="' + tablaChi[i][0] + '">' + tablaChi[i][0] + '</option>');
+
             }
         } else {
             if (this.validarSemilla() != 1) {
@@ -558,7 +652,7 @@
 
     }
 
-    function openwindow2(){
+    function openwindow2() {
         var semilla = $('#semilla2').val();
         var a = $('#valorA').val();
         var c = $('#valorC').val();
@@ -570,7 +664,7 @@
             arregloResultadoCongruenciaAux.push(arregloResultadoCongruencia[i][1]);
         }
 
-        var x = separar(arregloResultadoCongruenciaAux) ;
+        var x = separar(arregloResultadoCongruenciaAux);
 
         sessionStorage.setItem("arreglo", x);
 
@@ -595,7 +689,7 @@
             display: "none"
         });
         $('#resultadoChiCongru').css({
-            display: "none" 
+            display: "none"
         });
     }
 
@@ -700,22 +794,22 @@
         $('#tablaChiCuadradoVonNeuman tbody').html('')
         for (let i = 0; i < resultadoChiCuadrado.length; i++) {
             $('#tablaChiCuadradoVonNeuman tbody').append(
-                '<tr><td class="text-right">'+resultadoChiCuadrado[i][0]+'</td>'+
-                '<td class="text-right">'+resultadoChiCuadrado[i][1]+'</td>'+ 
-                '<td class="text-right">'+resultadoChiCuadrado[i][2]+'</td>'+
-                '<td class="text-right">'+resultadoChiCuadrado[i][3]+'</td>'+ 
-                '<td class="text-right">'+resultadoChiCuadrado[i][4]+'</td>'+ 
-                '<td class="text-right">'+resultadoChiCuadrado[i][5]+'</td></tr>');
+                '<tr><td class="text-right">' + resultadoChiCuadrado[i][0] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][1] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][2] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][3] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][4] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][5] + '</td></tr>');
             m += (resultadoChiCuadrado[i][5]);
         }
-        $('#tablaChiCuadradoVonNeuman tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>'+m+'</b></td></tr>');
-         
-        $('#resultadoChiVonNeuman').html('<h4>Resultado con 9 grados de libertad </h4> <br>' + verificarChi(m, p)) ;
+        $('#tablaChiCuadradoVonNeuman tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>' + m + '</b></td></tr>');
+
+        $('#resultadoChiVonNeuman').html('<h4>Resultado con 9 grados de libertad </h4> <br>' + verificarChi(m, p));
         $('#resultadoChiVonNeuman').css({
-            display: 'block' 
+            display: 'block'
         });
 
-        }
+    }
 </script>
 <script>
     function mostrarChiCuadradoCongru() {
@@ -740,30 +834,30 @@
         $('#tablaChiCuadradoCongru tbody').html('')
         for (let i = 0; i < resultadoChiCuadrado.length; i++) {
             $('#tablaChiCuadradoCongru tbody').append(
-                '<tr><td class="text-right">'+resultadoChiCuadrado[i][0]+'</td>'+
-                '<td class="text-right">'+resultadoChiCuadrado[i][1]+'</td>'+ 
-                '<td class="text-right">'+resultadoChiCuadrado[i][2]+'</td>'+
-                '<td class="text-right">'+resultadoChiCuadrado[i][3]+'</td>'+ 
-                '<td class="text-right">'+resultadoChiCuadrado[i][4]+'</td>'+ 
-                '<td class="text-right">'+resultadoChiCuadrado[i][5]+'</td></tr>');
+                '<tr><td class="text-right">' + resultadoChiCuadrado[i][0] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][1] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][2] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][3] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][4] + '</td>' +
+                '<td class="text-right">' + resultadoChiCuadrado[i][5] + '</td></tr>');
             m += (resultadoChiCuadrado[i][5]);
         }
-        $('#tablaChiCuadradoCongru tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>'+m+'</b></td></tr>');
+        $('#tablaChiCuadradoCongru tbody').append('<tr><td colspan="5" class="text-center"><b>Total</b></td><td class="text-right"><b>' + m + '</b></td></tr>');
 
-        $('#resultadoChiCongru').html('<h4>Resultado con 9 grados de libertad </h4> <br>' + verificarChi(m, p)) ;
+        $('#resultadoChiCongru').html('<h4>Resultado con 9 grados de libertad </h4> <br>' + verificarChi(m, p));
         $('#resultadoChiCongru').css({
-            display: 'block' 
+            display: 'block'
         });
 
     }
 </script>
 
 <script>
-    function mostarRachaVonNeuman(){
+    function mostarRachaVonNeuman() {
         $('#resultadoRachaVonNeuman').css({
-            display: "block" 
+            display: "block"
         });
-        
+
         var semilla = $('#semilla').val();
         var n = $('#iteraciones').val();
 
@@ -778,18 +872,18 @@
         }
         var resultadoRacha = racha(separar(arregloResultadoVonNeumanAux));
         $('#resultadoRachaVonNeuman').html(
-            '<h4>Resultados </h4>'+
-            '<p> N1: '+resultadoRacha[0]+'<br>' +
-            'N2: '+resultadoRacha[1]+'<br>' +
-            'Racha: '+resultadoRacha[2]+'</p>'
-        ) ;
+            '<h4>Resultados </h4>' +
+            '<p> N1: ' + resultadoRacha[0] + '<br>' +
+            'N2: ' + resultadoRacha[1] + '<br>' +
+            'Racha: ' + resultadoRacha[2] + '</p>'
+        );
     }
 </script>
 
 <script>
-    function mostrarRachaCongru(){
+    function mostrarRachaCongru() {
         $('#resultadoRachaCongru').css({
-            display: "block" 
+            display: "block"
         });
         var semilla = $('#semilla2').val();
         var a = $('#valorA').val();
@@ -807,11 +901,11 @@
         }
         var resultadoRachaCongu = racha(separar(arregloResultadoCongruAux));
         $('#resultadoRachaCongru').html(
-            '<h4>Resultados </h4>'+
-            '<p> N1: '+resultadoRachaCongu[0]+'<br>' +
-            'N2: '+resultadoRachaCongu[1]+'<br>' +
-            'Racha: '+resultadoRachaCongu[2]+'</p>'
-        ) ;
+            '<h4>Resultados </h4>' +
+            '<p> N1: ' + resultadoRachaCongu[0] + '<br>' +
+            'N2: ' + resultadoRachaCongu[1] + '<br>' +
+            'Racha: ' + resultadoRachaCongu[2] + '</p>'
+        );
     }
 </script>
 

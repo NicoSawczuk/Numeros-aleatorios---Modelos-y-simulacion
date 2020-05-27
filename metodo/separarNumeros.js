@@ -11,3 +11,19 @@ function separar(array) {
     }
     return arrayRetorno;
 }
+
+function ajustar (array,min,max){
+    var arrayRetorno2 = [];
+    var aux = 0;
+    for (let i = 0; i < array.length; i++) {
+        var division = (parseInt(array[i]) / 100);
+        var division = (parseFloat(division));
+
+        var diferencia = (parseFloat(max) - parseFloat(min));
+        diferencia = parseFloat(diferencia);
+
+        aux = ((division * diferencia) + parseFloat(min));
+        arrayRetorno2.push(Math.round(aux));
+    }
+    return arrayRetorno2;
+}
