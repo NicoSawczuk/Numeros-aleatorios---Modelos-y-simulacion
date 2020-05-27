@@ -599,7 +599,8 @@
                 arregloResultadoVonNeumanAux.push(arregloResultado[i][1])
             }
         }
-        var x = separarArrayN(arregloResultadoVonNeumanAux,2);
+        var w = separar(arregloResultadoVonNeumanAux);
+        var x = separarArrayN(w,2);
 
         //Obtenemos el máximo y el mínimo y ajustamos el array
         var min = $('#minimoVonNeuman').val();
@@ -707,7 +708,10 @@
                 arregloResultadoCongruenciaAux.push(arregloResultadoCongruencia[i][1]);
             }
 
-            var x = separarArrayN(arregloResultadoCongruenciaAux,2);
+            console.log(arregloResultadoCongruenciaAux)
+            var w = separar(arregloResultadoCongruenciaAux);
+            console.log(w);
+            var x = separarArrayN(w,2);
 
 
             console.log(x);
@@ -715,7 +719,7 @@
             var min = $('#minimoCongru').val();
             var max = $('#maximoCongru').val();
             var z = ajustar(x, min, max)
-
+            console.log(z);
             sessionStorage.setItem("arreglo", z);
 
             myWindow = window.open("./marcaClase.html", "Ventana2");
