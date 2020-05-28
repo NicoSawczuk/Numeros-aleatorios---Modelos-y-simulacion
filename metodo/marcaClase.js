@@ -1,4 +1,5 @@
 function calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades) {
+
     var arrayRetorno = [];
     var arrayAcumulado = [];
     var arrayMinimos = [];
