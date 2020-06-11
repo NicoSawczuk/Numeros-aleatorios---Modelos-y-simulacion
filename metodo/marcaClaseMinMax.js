@@ -1,38 +1,36 @@
-function calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades) {
+function marcaMinMax(min,max,arrayMC,arrayProbabilidades,arrayNumeros){
 
-    var arrayRetorno = [];
-    var arrayAcumulado = [];
-    var arrayMinimos = [];
-    var arrayMaximos = [];
-    var auxAcu = 0;
+    var arrayMinimos =[] ;
+    var arrayMaximos =[];
+    var arrayRetorno =[];
+    var cantElementosMarca = [];
+
+    arrayMinimos.push(min) ;
+
+   
+    var cantElementos = Number(max)-Number(min);
+    //luego vamos a calcular la cantidad de elementos por marcas de clase
     for (let i = 0; i < arrayProbabilidades.length; i++) {
-        arrayProbabilidades[i]= parseInt(arrayProbabilidades[i]);
+        cantElementosMarca.push(Number((arrayProbabilidades[i]*cantElementos)/100)) ;
     }
+    arrayRetorno.push(cantElementosMarca);
 
-    var min = 0;
+    //esto es para armar el array de minimos y maximos
     for (let i = 0; i < arrayProbabilidades.length; i++) {
-        //Calculamos lo acumulado
-        arrayAcumulado.push(parseInt(auxAcu) + parseInt(arrayProbabilidades[i]));
-        arrayMaximos.push(parseInt(arrayAcumulado[i]));
-        auxAcu = parseInt(auxAcu) + parseInt(arrayProbabilidades[i]);
-
-
-        //Cargamos el minimo y el máximo
-        arrayMinimos.push(min);
-
+        arrayMaximos.push(Number(min)+Number(arrayProbabilidades[i])) ;
+        min += Number(arrayProbabilidades[i]) + Number(0.1);
         
-
-        //Actualizamos los minimos
-        min = arrayMaximos[i]+1;
-
+        arrayMinimos.push(min.toFixed(2));        
     }
-    arrayRetorno.push(arrayAcumulado);
+    console.log('utlimo' + typeof(arrayMaximos[arrayMaximos.length-1]));
+    arrayMaximos[arrayMaximos.length-1] = (arrayMaximos[arrayMaximos.length-1]).toFixed(0);
+    arrayMinimos.pop();
+
     arrayRetorno.push(arrayMinimos);
     arrayRetorno.push(arrayMaximos);
 
-    //Declaramos los nuevos arrays ()
-    var arrayNumerosMC = []; //Este va a contener los mc en lugar de los numeros
 
+    var arrayNumerosMC = [];
 
     //Clasificamos
     for (let i = 0; i < arrayNumeros.length; i++) {
@@ -61,6 +59,9 @@ function calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades) {
     arrayRetorno.push(arrayApariciones);
 
     //Cargamos el array de aparaciciones esperadas
+    for (let i = 0; i < arrayProbabilidades.length; i++) {
+        arrayProbabilidades[i] = Number((100*Number(arrayProbabilidades[i]))/Number(cantElementos)).toFixed(3);
+    }
     arrayRetorno.push(arrayProbabilidades);
 
     //Obtenidas
@@ -72,15 +73,5 @@ function calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades) {
     //Cargamos las obtenidas
     arrayRetorno.push(arrayObtenidas);
 
-
-    /*El array de retorno contiene:
-         0: probabilidades acumuladas
-         1: probabilidades minimas
-         2: probabilidades maximas
-         3: cantidad de apariciones por marca de clase
-         4: probabilidades esperadas
-         5: probabilidades obtenidas
-    */
     return arrayRetorno;
-
 }

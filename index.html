@@ -601,6 +601,7 @@
         }
         var w = separar(arregloResultadoVonNeumanAux);
         var x = separarArrayN(w,2);
+        
 
         //Obtenemos el máximo y el mínimo y ajustamos el array
         var min = $('#minimoVonNeuman').val();
@@ -608,7 +609,9 @@
 
         if(validarMinMaxVonNeumann(min, max) == 2){
             $('#errorMinimoMaximoVonNeuman').html('');
-            var z = ajustar(x, min, max)
+            var z = ajustar(x, min, max);
+            z.push(min);
+            z.push(max);
             sessionStorage.setItem("arreglo", z);
             myWindow = window.open("./marcaClase.html", "Ventana");
         }else{
@@ -719,6 +722,8 @@
             var min = $('#minimoCongru').val();
             var max = $('#maximoCongru').val();
             var z = ajustar(x, min, max)
+            z.push(min);
+            z.push(max);
             console.log(z);
             sessionStorage.setItem("arreglo", z);
 

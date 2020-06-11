@@ -9,6 +9,7 @@
     <script src="./static/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
     <script src="./static/chartsjs/Chart.min.js"></script>
     <script src="./metodo/separarNumerosDosCifras.js"></script>
+    <script src="./metodo/marcaClaseMinMax.js"></script>
 
     <!-- Importamos los scripts -->
     <script src="./metodo/marcaClase.js"></script>
@@ -27,6 +28,12 @@
                     </p>
                 </div>
             </div>
+            <br>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" value="1" checked>
+                <label class="custom-control-label" for="customSwitch1">Porcentaje</label>
+            </div>
+            <br>
             <div class="row">
                 <div class="input-group col col-md-8">
                     <div class="input-group-prepend">
@@ -37,6 +44,25 @@
                     <input type="number" class="form-control" aria-label="Sizing example input"
                         aria-describedby="inputGroup-sizing-default" placeholder="Ingrese un número" id="cantMarcas"
                         onkeyup=agregarInputs()>
+                </div>
+            </div>
+            <br>
+            <div class="row" id="filaMinMax" >
+                <div class="input-group col col-md-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default"
+                            style="width: 150px;">Minimo</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" id="minimo" disabled>
+                </div>
+                <div class="input-group col col-md-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default"
+                            style="width: 150px;">Maximo</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" id="maximo" disabled>
                 </div>
             </div>
             <br>
@@ -91,8 +117,12 @@
         $(document).ready(function () {
             var controls = sessionStorage.getItem("arreglo");
             var arrayNumeros = controls.split(",");
+            var maximo = arrayNumeros.pop();
+            var minimo = arrayNumeros.pop();
+            $('#minimo').val(minimo);
+            $('#maximo').val(maximo);
             for (let i = 0; i < arrayNumeros.length; i++) {
-                $('#numerosGenerados').append(arrayNumeros[i]+', ')
+                $('#numerosGenerados').append(arrayNumeros[i] + ', ')
             }
 
         });
@@ -120,7 +150,7 @@
                     '<label for="nombre" class=" col-form-label text-md-right">Probabilidad</label>' +
                     '<input id="probabilidad' + i + '" type="number"' +
                     ' class="form-control" name="probabilidad' + i + '"' +
-                    'placeholder="Ingrese el valor de la MC en %" value="" required>' +
+                    'placeholder="Ingrese el valor de la MC en %" value="" required step="0.1">' +
                     '</div>' +
                     '<br>'
                 );
@@ -135,88 +165,170 @@
         }
 
         function calcularMarca() {
-
-
             var cant = $('#cantMarcas').val();
 
-            var suma = 0;
-            for (let i = 0; i < cant; i++) {
-                var aux = $('#probabilidad' + i + '').val();
-                suma += parseInt(aux);
-            }
-            if (suma == 100) {
-                $('#tablaMC').css({
-                    'display': 'block'
-                });
-                $('#tablaMC2').css({
-                    'display': 'block'
-                });
-                $('#alerta').css({
-                    'display': 'none'
-                });
+            if ($('#customSwitch1').is(':checked')) {
 
-                cant = parseInt(cant);
-                var arrayProbabilidades = [];
-                var arrayMC = [];
+                var suma = 0;
                 for (let i = 0; i < cant; i++) {
-                    arrayProbabilidades.push($("#probabilidad" + i).val());
-                    arrayMC.push($("#marcaClase" + i).val())
+                    var aux = $('#probabilidad' + i + '').val();
+                    suma += parseInt(aux);
                 }
-                console.log(arrayProbabilidades);
-                console.log(arrayMC);
-                
-                console.log(calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades));
-                var resultadosMC = calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades);
+                if (suma == 100) {
+                    $('#tablaMC').css({
+                        'display': 'block'
+                    });
+                    $('#tablaMC2').css({
+                        'display': 'block'
+                    });
+                    $('#alerta').css({
+                        'display': 'none'
+                    });
 
-                $('#trHeaderMC').html('');
-                $('#trHeaderMC').append('<td></td>')
-                for (let i = 0; i < cant; i++) {
-                    $('#trHeaderMC').append('' +
-                        '<td>' + arrayMC[i] + '</td>'
-                        + '');
-                }
-                var titulos = ["Acumulada", "Minimos", "Maximos"];
-                $('#tablaMC tbody').html('');
-                for (let i = 0; i < 3; i++) {
-                    $('#tablaMC tbody').append('<tr>');
-                    $('#tablaMC tbody').append('<td class="table-info text-center">' + titulos[i] + '</td>')
-                    for (let j = 0; j < cant; j++) {
-                        $('#tablaMC tbody').append('' +
-                            '<td class="text-right">' + resultadosMC[i][j] + '</td>'
+                    cant = parseInt(cant);
+                    var arrayProbabilidades = [];
+                    var arrayMC = [];
+                    for (let i = 0; i < cant; i++) {
+                        arrayProbabilidades.push($("#probabilidad" + i).val());
+                        arrayMC.push($("#marcaClase" + i).val())
+                    }
+                    console.log(arrayProbabilidades);
+                    console.log(arrayMC);
+
+                    console.log(calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades));
+                    var resultadosMC = calcularMarcaClase(arrayNumeros, arrayMC, arrayProbabilidades);
+
+                    $('#trHeaderMC').html('');
+                    $('#trHeaderMC').append('<td></td>')
+                    for (let i = 0; i < cant; i++) {
+                        $('#trHeaderMC').append('' +
+                            '<td>' + arrayMC[i] + '</td>'
                             + '');
                     }
-                    $('#tablaMC tbody').append('</tr>');
-                }
-
-
-                $('#tablaMC2 tbody').html('');
-                for (let i = 0; i < cant; i++) {
-                    $('#tablaMC2 tbody').append('<tr>');
-                    $('#tablaMC2 tbody').append('<td class="table-info text-center">' + arrayMC[i] + '</td>');
-                    for (let j = 3; j < 6; j++) {
-                        $('#tablaMC2 tbody').append('' +
-                            '<td class="text-right">' + resultadosMC[j][i] + '</td>'
-                            + '');
+                    var titulos = ["Acumulada", "Minimos", "Maximos"];
+                    $('#tablaMC tbody').html('');
+                    for (let i = 0; i < 3; i++) {
+                        $('#tablaMC tbody').append('<tr>');
+                        $('#tablaMC tbody').append('<td class="table-info text-center">' + titulos[i] + '</td>')
+                        for (let j = 0; j < cant; j++) {
+                            $('#tablaMC tbody').append('' +
+                                '<td class="text-right">' + resultadosMC[i][j] + '</td>'
+                                + '');
+                        }
+                        $('#tablaMC tbody').append('</tr>');
                     }
-                    $('#tablaMC2 tbody').append('</tr>');
-                }
 
-                //Creamos los graficos
-                $('#line-chart').css({
-                    'display': 'block'
-                });
-                construirGrafico(arrayMC, resultadosMC);
+
+                    $('#tablaMC2 tbody').html('');
+                    for (let i = 0; i < cant; i++) {
+                        $('#tablaMC2 tbody').append('<tr>');
+                        $('#tablaMC2 tbody').append('<td class="table-info text-center">' + arrayMC[i] + '</td>');
+                        for (let j = 3; j < 6; j++) {
+                            $('#tablaMC2 tbody').append('' +
+                                '<td class="text-right">' + resultadosMC[j][i] + '</td>'
+                                + '');
+                        }
+                        $('#tablaMC2 tbody').append('</tr>');
+                    }
+
+                    //Creamos los graficos
+                    $('#line-chart').css({
+                        'display': 'block'
+                    });
+                    construirGrafico(arrayMC, resultadosMC);
+
+                } else {
+                    $('#alerta').css({
+                        'display': 'block'
+                    });
+                    $('#alerta').html('La suma total de las probabilidades debe ser igual 100% ');
+
+                }
 
             } else {
-                $('#alerta').css({
-                    'display': 'block'
-                });
-                $('#alerta').html('La suma total de las probabilidades debe ser igual 100% ');
+                var mini = Number($('#minimo').val());
+                var maxi = Number($('#maximo').val());
+                var intervalo = (maxi) - (mini);
+                console.log('intervalo:' + intervalo);
+                var suma = 0;
+                for (let i = 0; i < cant; i++) {
+                    var aux = $('#probabilidad' + i + '').val();
+                    suma += parseFloat(aux);
+                }
+                if (suma == intervalo) {
+                    $('#tablaMC').css({
+                        'display': 'block'
+                    });
+                    $('#tablaMC2').css({
+                        'display': 'block'
+                    });
+                    $('#alerta').css({
+                        'display': 'none'
+                    });
+
+                    cant = parseInt(cant);
+                    var arrayProbabilidades = [];
+                    var arrayMC = [];
+                    for (let i = 0; i < cant; i++) {
+                        arrayProbabilidades.push($("#probabilidad" + i).val());
+                        arrayMC.push($("#marcaClase" + i).val())
+                    }
+                    console.log(arrayProbabilidades);
+                    console.log(arrayMC);
+
+                    
+                    var resultadosMC = marcaMinMax(mini, maxi, arrayMC, arrayProbabilidades, arrayNumeros);
+
+
+
+                    $('#trHeaderMC').html('');
+                    $('#trHeaderMC').append('<td></td>')
+                    for (let i = 0; i < cant; i++) {
+                        $('#trHeaderMC').append('' +
+                            '<td>' + arrayMC[i] + '</td>'
+                            + '');
+                    }
+                    var titulos = ["Probabilidades(%)","Minimos", "Maximos"];
+                    $('#tablaMC tbody').html('');
+                    for (let i = 0; i < 3; i++) {
+                        $('#tablaMC tbody').append('<tr>');
+                        $('#tablaMC tbody').append('<td class="table-info text-center">' + titulos[i] + '</td>')
+                        for (let j = 0; j < cant; j++) {
+                            $('#tablaMC tbody').append('' +
+                                '<td class="text-right">' + resultadosMC[i][j] + '</td>'
+                                + '');
+                        }
+                        $('#tablaMC tbody').append('</tr>');
+                    }
+
+
+                    $('#tablaMC2 tbody').html('');
+                    for (let i = 0; i < cant; i++) {
+                        $('#tablaMC2 tbody').append('<tr>');
+                        $('#tablaMC2 tbody').append('<td class="table-info text-center">' + arrayMC[i] + '</td>');
+                        for (let j = 3; j < 6; j++) {
+                            $('#tablaMC2 tbody').append('' +
+                                '<td class="text-right">' + resultadosMC[j][i] + '</td>'
+                                + '');
+                        }
+                        $('#tablaMC2 tbody').append('</tr>');
+                    }
+
+                    //Creamos los graficos
+                    $('#line-chart').css({
+                        'display': 'block'
+                    });
+                    construirGrafico(arrayMC, resultadosMC);
+
+                } else {
+                    $('#alerta').css({
+                        'display': 'block'
+                    });
+                    $('#alerta').html('La suma total de las probabilidades debe ser igual a la diferencia entre el minimo y el maximo (' + intervalo + ')');
+
+                }
 
             }
-
-
-
 
         }
     </script>
@@ -260,20 +372,20 @@
                 options: {
                     title: {
                         display: true,
-                        text: 'Resultados esperados y obtenidos'   
+                        text: 'Resultados esperados y obtenidos'
                     },
                     scales: {
                         yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Valor por Marca de Clase'
-                        }
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Valor por Marca de Clase'
+                            }
                         }],
                         xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Marcas de Clase'
-                        }
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Marcas de Clase'
+                            }
                         }]
                     }
                 }
