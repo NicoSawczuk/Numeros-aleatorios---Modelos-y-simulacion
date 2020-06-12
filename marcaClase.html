@@ -289,14 +289,14 @@
                             '<td>' + arrayMC[i] + '</td>'
                             + '');
                     }
-                    var titulos = ["Probabilidades(%)","Minimos", "Maximos"];
+                    var titulos = ["Elementos por cada MC","Minimos", "Maximos"];
                     $('#tablaMC tbody').html('');
                     for (let i = 0; i < 3; i++) {
                         $('#tablaMC tbody').append('<tr>');
                         $('#tablaMC tbody').append('<td class="table-info text-center">' + titulos[i] + '</td>')
                         for (let j = 0; j < cant; j++) {
                             $('#tablaMC tbody').append('' +
-                                '<td class="text-right">' + resultadosMC[i][j] + '</td>'
+                                '<td class="text-right">' + Number(resultadosMC[i][j]).toFixed(2) + '</td>'
                                 + '');
                         }
                         $('#tablaMC tbody').append('</tr>');
