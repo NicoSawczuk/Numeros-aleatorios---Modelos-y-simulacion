@@ -119,6 +119,7 @@
             var arrayNumeros = controls.split(",");
             var maximo = arrayNumeros.pop();
             var minimo = arrayNumeros.pop();
+            console.log('Total: ' + arrayNumeros.length);
             $('#minimo').val(minimo);
             $('#maximo').val(maximo);
             for (let i = 0; i < arrayNumeros.length; i++) {
@@ -172,7 +173,7 @@
                 var suma = 0;
                 for (let i = 0; i < cant; i++) {
                     var aux = $('#probabilidad' + i + '').val();
-                    suma += parseInt(aux);
+                    suma += parseFloat(aux);
                 }
                 if (suma == 100) {
                     $('#tablaMC').css({
@@ -241,7 +242,7 @@
                     $('#alerta').css({
                         'display': 'block'
                     });
-                    $('#alerta').html('La suma total de las probabilidades debe ser igual 100% ');
+                    $('#alerta').html('La suma total de las probabilidades debe ser igual 100%, falta '+ 100-suma);
 
                 }
 
@@ -255,7 +256,7 @@
                     var aux = $('#probabilidad' + i + '').val();
                     suma += parseFloat(aux);
                 }
-                if (suma == intervalo) {
+                if (suma == 100) {
                     $('#tablaMC').css({
                         'display': 'block'
                     });
@@ -324,7 +325,7 @@
                     $('#alerta').css({
                         'display': 'block'
                     });
-                    $('#alerta').html('La suma total de las probabilidades debe ser igual a la diferencia entre el minimo y el maximo (' + intervalo + ')');
+                    $('#alerta').html('La suma total de las probabilidades debe ser igual a la diferencia entre el minimo y el maximo (' + intervalo + '), falta ' + Number(Number(100)-Number(suma)));
 
                 }
 
