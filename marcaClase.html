@@ -242,7 +242,7 @@
                     $('#alerta').css({
                         'display': 'block'
                     });
-                    $('#alerta').html('La suma total de las probabilidades debe ser igual 100%, falta '+ 100-suma);
+                    $('#alerta').html('La suma total de las probabilidades debe ser igual 100%, falta '+ (100-Number(suma)));
 
                 }
 
@@ -325,7 +325,7 @@
                     $('#alerta').css({
                         'display': 'block'
                     });
-                    $('#alerta').html('La suma total de las probabilidades debe ser igual a la diferencia entre el minimo y el maximo (' + intervalo + '), falta ' + Number(Number(100)-Number(suma)));
+                    $('#alerta').html('La suma total de las probabilidades debe ser igual 100%, falta '+ (100-Number(suma)));
 
                 }
 
