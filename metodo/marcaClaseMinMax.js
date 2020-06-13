@@ -35,12 +35,13 @@ function marcaMinMax(min,max,arrayMC,arrayProbabilidades,arrayNumeros){
     //Clasificamos
     for (let i = 0; i < arrayNumeros.length; i++) {
         for (let j = 0; j < arrayMinimos.length; j++) {
-            if (arrayNumeros[i] >= arrayMinimos[j]  && arrayNumeros[i] <= arrayMaximos[j]){
+            if (Number(arrayNumeros[i]) >= Number(arrayMinimos[j])  && Number(arrayNumeros[i]) <= Number(arrayMaximos[j])){
                 arrayNumerosMC[i] = arrayMC[j];
                 break;
             }            
         }
     }
+    console.log('array numeros mc ' + arrayNumerosMC)
 
     //Apariciones
     arrayApariciones = [];
@@ -48,12 +49,13 @@ function marcaMinMax(min,max,arrayMC,arrayProbabilidades,arrayNumeros){
     for (let i = 0; i < arrayMC.length; i++) {
         var cant = 0;
         for (let j = 0; j < arrayNumerosMC.length; j++) {
-            if (arrayMC[i] === arrayNumerosMC[j]){
+            if (String(arrayMC[i]) === String(arrayNumerosMC[j])){
                 cant++;
             }
         }
         arrayApariciones.push(cant);
     }
+    console.log('apariciones' + arrayApariciones) ;
 
     //Cargamos el array de apariciones
     arrayRetorno.push(arrayApariciones);
