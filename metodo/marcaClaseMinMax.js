@@ -17,8 +17,8 @@ function marcaMinMax(min,max,arrayMC,arrayProbabilidades,arrayNumeros){
 
     //esto es para armar el array de minimos y maximos
     for (let i = 0; i < arrayProbabilidades.length; i++) {
-        arrayMaximos.push(Number(min)+Number(arrayProbabilidades[i])) ;
-        min += Number(arrayProbabilidades[i]) + Number(0.1);
+        arrayMaximos.push(Number(min)+Number(cantElementosMarca[i])) ;
+        min += Number(cantElementosMarca[i]) + Number(0.1);
         
         arrayMinimos.push(min.toFixed(2));        
     }
